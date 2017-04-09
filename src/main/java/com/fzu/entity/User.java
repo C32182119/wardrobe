@@ -5,8 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
-
+    //主键
     @Id
+    //IDENTITY表示自增
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;

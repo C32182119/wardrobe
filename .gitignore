@@ -1,4 +1,4 @@
 target
 .idea
 wardrobe.iml
-jdbc.properties
+src/main/resources/jdbc.properties

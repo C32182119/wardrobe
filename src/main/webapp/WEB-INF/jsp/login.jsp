@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<button onClick="mainJS.func.signIn()">登  录1111111</button>
+<button onClick="mainJS.ajax.signIn()">登  录1111111</button>
 
 </body>
 </html>

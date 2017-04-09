@@ -1,3 +1,3 @@
-执行
+鎵ц
 git update-index --assume-unchanged src/main/resources/*.properties
-忽略本地配置文件修改
+蹇界暐鏈湴閰嶇疆鏂囦欢淇敼

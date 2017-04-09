@@ -32,9 +32,9 @@
         </c:if>
         <form class="form-signin"  action="${context}/xxxx" method="post">
             <label for="inputUserName" class="sr-only">用户名：</label>
-            <input type="text" id="inputUserName" name="userName" class="form-control" placeholder="请输入帐号" required autofocus>&nbsp
+            <input type="text" id="username" name="userName" class="form-control" placeholder="请输入帐号" required autofocus>&nbsp
             <label for="inputPassword" class="sr-only">密  码：</label>
-            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="请输入密码" required>
+            <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码" required>
 
             <div style="width: 100%">
                 <div style="float:left; width: 45%">

@@ -24,7 +24,7 @@
 <body>
 <div id="header">
     <div id="logo">
-        福州大学数计学院自动排课系统
+    福州大学数计学院自动排课系统
     </div>
     <div id = go>
         <c:if test="${!empty errorMsg}">

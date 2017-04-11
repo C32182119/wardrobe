@@ -3,51 +3,54 @@ package com.fzu.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="cloth_info")
+@Table(name = "cloth_info")
 public class ClothInfo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int Id;
 
-    @Column(name="cloth_id")
+    @Column(name = "cloth_id")
     private String clothId;
 
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private String userId;
 
-    @Column(name="cloth_name")
+    @Column(name = "cloth_name")
     private String clothName;
 
-    @Column(name="cloth_price")
+    @Column(name = "cloth_price")
     private String clothPrice;
 
-    @Column(name="create_time")
+    @Column(name = "create_time")
     private String createTime;
 
-    @Column(name="material")
+    @Column(name = "material")
     private int material;
 
-    @Column(name="occasion")
+    @Column(name = "occasion")
     private int occasion;
 
-    @Column(name="season")
+    @Column(name = "season")
     private int season;
 
-    @Column(name="cloth_img")
+    @Column(name = "color")
+    private int color;
+
+    @Column(name = "cloth_img")
     private String clothImg;
 
-    @Column(name="is_cleaned")
+    @Column(name = "is_cleaned")
     private int isCleaned;
 
-    @Column(name="is_for_sale")
+    @Column(name = "is_for_sale")
     private int isForSale;
 
-    @Column(name="is_selled")
+    @Column(name = "is_selled")
     private int isSelled;
 
-    @Column(name="others")
+    @Column(name = "others")
     private String others;
 
     public int getId() {
@@ -120,6 +123,14 @@ public class ClothInfo extends BaseEntity {
 
     public void setSeason(int season) {
         this.season = season;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public String getClothImg() {

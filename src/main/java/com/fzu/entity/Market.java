@@ -2,29 +2,28 @@ package com.fzu.entity;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "market")
 public class Market extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private String userId;
 
-    @Column(name="cloth_id")
+    @Column(name = "cloth_id")
     private String clothId;
 
-    @Column(name="sale_price")
+    @Column(name = "sale_price")
     private String salePrice;
 
-    @Column(name="is_selled")
+    @Column(name = "is_selled")
     private int isSelled;
 
-    @Column(name="sale_time")
+    @Column(name = "sale_time")
     private String saleTime;
 
     public int getId() {

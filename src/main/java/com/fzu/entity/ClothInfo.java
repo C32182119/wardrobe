@@ -38,6 +38,9 @@ public class ClothInfo extends BaseEntity {
     @Column(name = "color")
     private int color;
 
+    @Column(name = "size")
+    private int size;
+
     @Column(name = "cloth_img")
     private String clothImg;
 
@@ -131,6 +134,14 @@ public class ClothInfo extends BaseEntity {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public String getClothImg() {

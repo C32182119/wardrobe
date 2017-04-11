@@ -19,13 +19,48 @@
         <body>
 
 
-        <label>用户名：</label>
-        <input id="username" type="text" placeholder="请输入帐号">
-        <label>密  码：</label>
-        <input id="password" type="password" placeholder="请输入密码">
+        <%--二手交易商品--%>
+        <div>
+                <%--多个商品--%>
+                <ul>
+                    <li>
+                        <%--商品--%>
+                        <div>
+                            <%--添加，修改图片--%>
+                            <img />
+                            <label>商品名</label>
+                            <label>出售价格</label>
+                            <label>卖家用户名</label>
+                        </div>
+                    </li>
+                    <li></li>
+                    <li></li>
+                    ……
+                </ul>
 
-        <button onClick="mainJS.func.signIn()">登录</button>
-        <button onClick="">注册</button>
+                <%--商品详情--%>
+                <div>
+                        <%--左侧--%>
+                        <img />
+                        <%--右侧--%>
+                        <div>
+                        <%--商品信息--%>
+                        <div>
+                            <a>卖家用户名</a>
+                            <label>商品名</label>
+                            <label>原始价格</label>
+                            <label>出售价格</label>
+                            <label>尺码</label>
+                        </div>
+                        <%--留言板--%>
+                        <div>
+                        </div>
+                        </div>
+
+
+                </div>
+        </div>
+
 
         </body>
         </html>

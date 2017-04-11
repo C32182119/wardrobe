@@ -1,6 +1,6 @@
 /*
-SQLyog Enterprise v12.09 (64 bit)
-MySQL - 5.7.11 : Database - wardrobe
+SQLyog Ultimate v12.09 (64 bit)
+MySQL - 5.7.17-log : Database - wardrobe
 *********************************************************************
 */
 
@@ -30,6 +30,8 @@ CREATE TABLE `cloth_info` (
   `material` int(11) DEFAULT NULL,
   `occasion` int(11) DEFAULT NULL,
   `season` int(11) DEFAULT NULL,
+  `color` int(11) DEFAULT NULL,
+  `size` int(11) DEFAULT NULL,
   `cloth_img` varchar(255) DEFAULT NULL,
   `is_cleaned` int(11) DEFAULT NULL,
   `is_for_sale` int(11) DEFAULT NULL,
@@ -60,6 +62,7 @@ DROP TABLE IF EXISTS `information`;
 CREATE TABLE `information` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(255) DEFAULT NULL,
+  `info_id` varchar(255) DEFAULT NULL,
   `info_type` int(11) DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)

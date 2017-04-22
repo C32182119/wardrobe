@@ -11,7 +11,7 @@ public class InformationService {
     @Autowired
     private InformationDao informationDao;
 
-    public void saveInformation (Information information) {
+    public void saveInformation(Information information) {
         informationDao.save(information);
     }
 

@@ -11,10 +11,11 @@
     <meta charset=UTF-8">
     <title>自动排课系统</title>
 
-    <link rel="stylesheet" href="${context}/res/css/main.css">
+    <link rel="stylesheet" href="res/css/main.css">
 
-    <script src="${context}/res/js/external/jquery-1.9.1.js"></script>
-    <script src="${context}/res/js/main.js"></script>
+    <script src="res/js/external/jquery-1.9.1.js"></script>
+    <script src="res/js/main.js"></script>
+
 </head>
 <body>
 
@@ -24,7 +25,7 @@
     <label>密  码：</label>
     <input id="password" type="password" placeholder="请输入密码">
 
-    <button onClick="mainJS.func.signIn()">登录</button>
+    <button onClick="mainJS.ajax.signIn()">登录</button>
     <button onClick="">注册</button>
 
 </body>

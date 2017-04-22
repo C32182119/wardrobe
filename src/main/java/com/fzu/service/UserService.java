@@ -15,5 +15,7 @@ public class UserService {
         return userDao.getUserByUsername(username);
     }
 
+    public void saveUser(User user) { userDao.save(user); }
 
+    public void updateUser(User user) { userDao.update(user); }
 }

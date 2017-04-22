@@ -24,18 +24,18 @@ public class UserController extends BaseController {
     private InformationService informationService;
 
     @RequestMapping("/home-page")
-    public String homePage () {
+    public String homePage() {
         return "home_page";
     }
 
     @RequestMapping("/send-out")
     public @ResponseBody
-    boolean sendOut (@PathVariable("userId") String userId,
+    boolean sendOut(@PathVariable("userId") String userId,
                        @RequestBody Information information) {
         boolean isSuccess = false;
-        //
+
         information.setUserId(userId);
-        information.setInfoId(Util.generateIdByUserId(userId));
+        information.setInfoId(Util.getNewIdByType("i"));
         informationService.saveInformation(information);
         isSuccess = true;
         return isSuccess;

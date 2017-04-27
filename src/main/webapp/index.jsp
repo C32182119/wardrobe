@@ -35,11 +35,11 @@
                 <el-col :span="10" :offset="6">
                     <div class="grid-content">
                         <el-menu default-active="1" mode="horizontal" @select="handleSelect">
-                            <el-menu-item index="1"><a href="#">首页</a></el-menu-item>
-                            <el-menu-item index="2"><a href="../page_2_01.html">衣橱管理</a></el-menu-item>
-                            <el-menu-item index="3"><a href="../page_3.html">二手市场</a></el-menu-item>
-                            <el-menu-item index="4"><a href="../page_4.html">动态</a></el-menu-item>
-                            <el-menu-item index="5"><a href="../page_5.html">后台</a></el-menu-item>
+                            <el-menu-item index="1"><a href="javascript:mainJS.ajax.requestHtml('index.html');">首页</a></el-menu-item>
+                            <el-menu-item index="2"><a href="javascript:mainJS.ajax.requestHtml('management.html');">衣橱管理</a></el-menu-item>
+                            <el-menu-item index="3"><a href="javascript:mainJS.ajax.requestHtml('market.html');">二手市场</a></el-menu-item>
+                            <el-menu-item index="4"><a href="javascript:mainJS.ajax.requestHtml('info-release.html');">动态</a></el-menu-item>
+                            <el-menu-item index="5"><a href="javascript:mainJS.ajax.requestHtml('index.html');">后台</a></el-menu-item>
                         </el-menu>
                     </div>
                 </el-col>
@@ -97,6 +97,6 @@
     </div>
 
     <script src="res/js/main.js"></script>
-    <script>mainJS.ajax.test();</script>
+    <script>mainJS.ajax.requestHtml("index.html");</script>
 </body>
 </html>

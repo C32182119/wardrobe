@@ -21,6 +21,21 @@ var mainJS = (function (){
     }
     //ajax
     {
+	    ajax.requestHtml = function (htmlName) {
+		    $.ajax({
+			    url: local.CLASS_PATH + htmlName,
+			    type: "GET",
+			    dataType: "html",
+			    success: function (data) {
+				    $("#main").html(data);
+				    initVue();
+			    },
+			    error: function () {
+				    alert("error !");
+			    }
+		    });
+	    };
+
         //登录页
 	    ajax.signIn = function () {
             var user = {};
@@ -82,29 +97,12 @@ var mainJS = (function (){
             });
         };
 
-        ajax.test = function () {
-	        $.ajax({
-		        url: local.CLASS_PATH + "index.html",
-		        type: "GET",
-		        dataType: "html",
-		        success: function (data) {
-			        console.log(data);
-			        $("#main").html(data);
-			        init();
-		        },
-		        error: function () {
-			        alert("error !");
-		        }
-	        });
-        };
-
     }
 
     return module;
 })();
 
-var init = function () {
-
+var initVue = function () {
 	new Vue({
 		el: "#app_1",
 		data: function () {

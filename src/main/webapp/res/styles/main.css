@@ -170,7 +170,7 @@ p {
 .board_pic{
     height: 500px;
     width: 90%;
-    background-image: url(imgs/grey_bg.jpg);
+    background-image: url(../imgs/grey_bg.jpg);
     text-align: center;
     background-size: 100%;
 }

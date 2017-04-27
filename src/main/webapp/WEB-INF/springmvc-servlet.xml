@@ -47,7 +47,7 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:viewNames="*.html"
           p:prefix="/WEB-INF/html/"
-          p:suffix=".html"
+          p:suffix=""
           p:contentType="text/html;charset=UTF-8"
           p:order="0"/>
 

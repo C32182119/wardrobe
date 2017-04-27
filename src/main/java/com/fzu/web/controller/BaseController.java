@@ -15,7 +15,7 @@ public class BaseController {
     @RequestMapping("/{html}.html")
     public String html(@PathVariable("html") String html) {
         System.out.println("BaseController: " + html);
-        return html;
+        return html + ".html";
     }
 
 }

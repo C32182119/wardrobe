@@ -101,3 +101,210 @@ var mainJS = (function (){
 
     return module;
 })();
+
+/**
+ * Created by Ye on 2017/4/24.
+ */
+new Vue({
+    el: "#app_1",
+    data: function () {
+        //"登录"验证函数
+        var checkName = (rule, value, callback) => {
+            if (!value) {
+                return callback(new Error('用户名不能为空'));
+            }
+        };
+        var validatePass = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入密码'));
+            } else {
+                if (this.ruleForm2.checkPass !== '') {
+                    this.$refs.ruleForm2.validateField('checkPass');
+                }
+                callback();
+            }
+        };
+        //"注册"验证函数
+        var checkName = (rule, value, callback) => {
+            if (!value) {
+                return callback(new Error('用户名不能为空'));
+            }
+        };
+        var validatePass = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入密码'));
+            } else {
+                if (this.ruleForm3.checkPass !== '') {
+                    this.$refs.ruleForm3.validateField('checkPass');
+                }
+                callback();
+            }
+        };
+        var validatePass2 = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请再次输入密码'));
+            } else if (value !== this.ruleForm3.pass) {
+                callback(new Error('两次输入密码不一致!'));
+            } else {
+                callback();
+            }
+        };
+        return {
+            items: [
+                "styles/imgs/slider-1.jpg",
+                "styles/imgs/blog-1.jpg",
+                "styles/imgs/blog-2.jpg",
+                "styles/imgs/blog-3.jpg"
+            ],
+
+            //"登录"
+            dialogVisible2: false,
+            ruleForm2: {
+                // age改为userName,
+                userName: '',
+                pass: '',
+            },
+            rules2: {
+                pass: [
+                    { validator: validatePass, trigger: 'blur' }
+                ],
+                // 此处vlidator: checkAge修改为checkName
+                userName: [
+                    { validator: checkName, trigger: 'blur' }
+                ]
+            },
+            //"注册"
+            dialogVisible3: false,
+            ruleForm3: {
+                userName: '',
+                pass: '',
+                checkPass: ''
+            },
+            rules3: {
+                pass: [
+                    { validator: validatePass, trigger: 'blur' }
+                ],
+                checkPass: [
+                    { validator: validatePass2, trigger: 'blur' }
+                ],
+                // 此处vlidator: checkAge修改为checkName
+                userName: [
+                    { validator: checkName, trigger: 'blur' }
+                ]
+            },
+            // currentDate: new Date()
+
+            //page_2
+            activeIndex: '1',
+            activeIndex2: '1',
+            activeManage: 'first',
+            isShowLike: false,
+            isShowMarket: false,
+            isShowClean: false,
+            //将formInline改成Conditions
+            Conditions: {
+                purcher_time: '',
+                season: '',
+                occasion: '',
+                material: '',
+                color: '',
+            },
+            selling: false,
+            cleaning: false,
+            input: '',
+            // 表单
+            form: {
+                month: '',
+                season: '',
+                material: '',
+                occasion: '',
+                color: '',
+                size: '',
+                desc: ''
+            },
+            //上传图片
+            imageUrl: '',
+
+            //page_3
+            checked3: false,
+
+            //page_4
+            textarea: '',
+            textarea3: '',
+
+        };
+    },
+
+    methods: {
+        //nav-menu
+        handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        //登录注册对话框
+        submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    alert('submit!');
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
+        },
+        //page_2选项卡
+        handleClickManage(tab, event) {
+            console.log(tab, event);
+        },
+        //“查询”按钮
+        screenQuery() {
+            console.log('submit!');
+        },
+        //“确定”按钮
+        onSubmit2() {
+            console.log('submit2!');
+        },
+        //“添加”按钮
+        clothAdd() {
+            console.log('submit3!');
+        },
+        //“修改”按钮
+        onSubmit4() {
+            console.log('submit4!');
+        },
+        //添加新衣图片
+        handleAvatarSuccess(res, file) {
+            this.imageUrl = URL.createObjectURL(file.raw);
+        },
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG) {
+                this.$message.error('上传头像图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+                this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
+        },
+
+    }
+});
+
+var xxxx = function () {
+    var xx = document.getElementById("xxxx"),
+        yy = document.getElementById("yyyy");
+    xx.style.display = "none";
+    yy.style.display = "block";
+};
+
+var yyyy = function () {
+    var xx = document.getElementById("xxxx"),
+        yy = document.getElementById("yyyy");
+    yy.style.display = "none";
+    xx.style.display = "block";
+};
+

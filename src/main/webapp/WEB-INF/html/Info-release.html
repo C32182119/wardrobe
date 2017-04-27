@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InfoRelease</title>
+</head>
+<body>
+    <!-- middle -->
+    <div class="container">
+        <!-- 路径导航栏 -->
+        <el-row>
+            <el-col :span="24">
+                <div class="grid-content bg-base" >
+                    <el-breadcrumb separator="/">
+                        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                        <el-breadcrumb-item>动态</el-breadcrumb-item>
+                    </el-breadcrumb>
+                </div>
+            </el-col>
+        </el-row>
+        <!-- 路径导航栏 /- -->
+
+        <!-- title -->
+        <el-row>
+            <el-col :span="24" class="center title">
+                <p><h>动态</h></p>
+                <p>INFO RELEASE</p>
+                <img src="styles/imgs/section-seprator.png"/>
+            </el-col>
+        </el-row>
+        <!-- title /- -->
+
+        <!-- section -->
+
+        <el-row>
+            <el-col :span="24">
+                <div class="grid-content bg-white">
+                    <el-tabs v-model="activeName2" type="card" @tab-click="handleClick">
+                        <el-tab-pane label="个人动态" name="first">
+                            <!-- 点击加号展开添加新动态模块-->
+
+                            <div>
+                                <!-- 添加新动态 -->
+                                <el-row>
+                                    <a><i class="el-icon-plus"></i></a>
+                                </el-row>
+                                <el-card id="zzzz2" :body-style="{ padding: '0px' }">
+                                    <el-row  style="padding-top: 28px">
+                                        <el-col :span="7" :offset="2">
+                                            <!-- 添加配图-->
+                                            <el-upload
+                                                    class="avatar-uploader"
+                                                    action="https://jsonplaceholder.typicode.com/posts/"
+                                                    :show-file-list="false"
+                                                    :on-success="handleAvatarSuccess"
+                                                    :before-upload="beforeAvatarUpload">
+                                                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                            </el-upload>
+                                        </el-col>
+                                        <el-col :span="11"  :offset="2">
+                                            <!-- 编辑个人动态内容 -->
+                                            <div style="margin: 20px 0;"></div>
+                                            <el-input style="width: 95%;"
+                                                      type="textarea"
+                                                      :autosize="{ minRows: 2, maxRows: 4}"
+                                                      placeholder="请输入内容"
+                                                      v-model="textarea3">
+                                            </el-input>
+                                            <div class="st4">
+                                                <el-button type="primary" @click="onSubmit3"><span>提交</span></el-button>
+                                            </div>
+                                        </el-col>
+                                        <el-col :span="2"></el-col>
+                                    </el-row>
+                                </el-card>
+                            </div>
+                            <!-- 添加新动态模块 结束 -->
+                            <el-card :body-style="{ padding: '0px' }">
+                                <!-- n个动态 -->
+                                <el-row>
+                                    <el-col :span="7" :offset="2">
+                                        <img src="styles/imgs/blog-2.jpg">
+                                    </el-col>
+                                    <el-col :span="8" :offset="2">
+                                        <!-- 二手动态内容 -->
+                                        <div style="padding: 14px;">
+                                            <h>个人动态1</h>
+                                            <p>天气不错</p>
+                                            <p>发布时间：2017.03.01</p>
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="3"></el-col>
+                                    <el-col :span="2"></el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="12" :offset="11">
+                                        <el-card style="width: 95%;" :body-style="{ padding: '0px' }">
+                                            <a>评论</a>
+                                            <p>1</p>
+                                            <p>2</p>
+                                            <p>3</p>
+                                        </el-card>
+                                    </el-col>
+                                    <el-col :span="1"></el-col>
+                                </el-row>
+                            </el-card>
+                        </el-tab-pane>
+                        <el-tab-pane label="关注的人" name="third">
+                            <el-row>
+                                <!-- n个动态 -->
+                                <el-col :span="3"  :offset="1">
+                                    <el-card :body-style="{ padding: '0px' }">
+                                        <div class="center" style="margin:20px auto; height: 100px; width: 100px; background-color: gray">
+                                            <img />
+                                        </div>
+                                        <!-- 关注人用户名 -->
+                                        <div class="center">
+                                            <a href="">小明</a>
+                                        </div>
+                                    </el-card>
+                                </el-col>
+                                <el-col :span="3"  :offset="1">
+                                    <el-card :body-style="{ padding: '0px' }">
+                                        <div class="center" style="margin:20px auto; height: 100px; width: 100px; background-color: gray">
+                                            <img />
+                                        </div>
+                                        <!-- 关注人用户名 -->
+                                        <div class="center">
+                                            <a href="">小明</a>
+                                        </div>
+                                    </el-card>
+                                </el-col>
+                                <el-col :span="3"  :offset="1">
+                                    <el-card :body-style="{ padding: '0px' }">
+                                        <div class="center" style="margin:20px auto; height: 100px; width: 100px; background-color: gray">
+                                            <img />
+                                        </div>
+                                        <!-- 关注人用户名 -->
+                                        <div class="center">
+                                            <a href="">小明</a>
+                                        </div>
+                                    </el-card>
+                                </el-col>
+                                <el-col :span="3"  :offset="1">
+                                    <el-card :body-style="{ padding: '0px' }">
+                                        <div class="center" style="margin:20px auto; height: 100px; width: 100px; background-color: gray">
+                                            <img />
+                                        </div>
+                                        <!-- 关注人用户名 -->
+                                        <div class="center">
+                                            <a href="">小明</a>
+                                        </div>
+                                    </el-card>
+                                </el-col>
+                                <el-col :span="3"  :offset="1">
+                                    <el-card :body-style="{ padding: '0px' }">
+                                        <div class="center" style="margin:20px auto; height: 100px; width: 100px; background-color: gray">
+                                            <img />
+                                        </div>
+                                        <!-- 关注人用户名 -->
+                                        <div class="center">
+                                            <a href="">小明</a>
+                                        </div>
+                                    </el-card>
+                                </el-col>
+                                <el-col :span="3"  :offset="1">
+                                    <el-card :body-style="{ padding: '0px' }">
+                                        <div class="center" style="margin:20px auto; height: 100px; width: 100px; background-color: gray">
+                                            <img />
+                                        </div>
+                                        <!-- 关注人用户名 -->
+                                        <div class="center">
+                                            <a href="">小明</a>
+                                        </div>
+                                    </el-card>
+                                </el-col>
+                            </el-row>
+                        </el-tab-pane>
+                    </el-tabs>
+                </div>
+            </el-col>
+        </el-row>
+
+        <!-- section /- -->
+        <!-- middle /- -->
+
+        <!-- footer -->
+        <!-- footer /- -->
+    </div>
+</body>
+</html>

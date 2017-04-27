@@ -59,17 +59,4 @@ public class Util {
         return type + generateId() + getCount();
     }
 
-//    public static void main(String [] args) {
-//        long value = System.currentTimeMillis();
-//        String res;
-//        long startTime, endTime;
-//        startTime = System.currentTimeMillis();
-//        res = convertHex(value);
-//        endTime = System.currentTimeMillis();
-//        System.out.printf("convertHex: %s; use time: %d ms\n", res, startTime);
-//        System.out.printf("generateId: %s\n", generateId());
-//        System.out.printf("getNewIdByType: %s\n", getNewIdByType("u"));
-//
-//    }
-
 }

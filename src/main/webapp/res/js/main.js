@@ -82,6 +82,21 @@ var mainJS = (function (){
             });
         };
 
+        ajax.test = function () {
+	        $.ajax({
+		        url: local.CLASS_PATH + "home.html",
+		        type: "POST",
+		        dataType: "html",
+		        success: function (data) {
+			        console.log(data);
+			        $("#main").html(data);
+		        },
+		        error: function () {
+			        alert("error !");
+		        }
+	        });
+        };
+
     }
 
     return module;

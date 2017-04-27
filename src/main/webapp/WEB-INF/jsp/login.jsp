@@ -28,5 +28,9 @@
     <button onClick="mainJS.ajax.signIn()">登录</button>
     <button onClick="">注册</button>
 
+    <button onClick="mainJS.ajax.test()">test</button>
+
+    <div id="main"></div>
+
 </body>
 </html>

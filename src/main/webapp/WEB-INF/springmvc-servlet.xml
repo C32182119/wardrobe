@@ -41,7 +41,15 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:viewClass="org.springframework.web.servlet.view.JstlView"
           p:prefix="/WEB-INF/jsp/"
-          p:suffix=".jsp"/>
+          p:suffix=".jsp"
+          p:order="1"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:viewNames="*.html"
+          p:prefix="/WEB-INF/html/"
+          p:suffix=".html"
+          p:contentType="text/html;charset=UTF-8"
+          p:order="0"/>
 
     <!--<bean id="multipartResolver"-->
     <!--class="org.springframework.web.multipart.commons.CommonsMultipartResolver"-->

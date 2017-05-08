@@ -102,7 +102,7 @@ var mainJS = (function (){
     return module;
 })();
 
-var initVue = function () {
+// var initVue = function () {
 	new Vue({
 		el: "#app_1",
 		data: function () {
@@ -306,4 +306,4 @@ var initVue = function () {
 		xx.style.display = "block";
 	};
 
-};
+// };

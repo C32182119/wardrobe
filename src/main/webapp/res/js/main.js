@@ -149,10 +149,10 @@ var mainJS = (function (){
 			};
 			return {
 				items: [
-					"styles/imgs/slider-1.jpg",
-					"styles/imgs/blog-1.jpg",
-					"styles/imgs/blog-2.jpg",
-					"styles/imgs/blog-3.jpg"
+					"res/imgs/slider-1.jpg",
+					"res/imgs/blog-1.jpg",
+					"res/imgs/blog-2.jpg",
+					"res/imgs/blog-3.jpg"
 				],
 
 				//"登录"

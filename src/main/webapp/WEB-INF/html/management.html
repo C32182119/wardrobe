@@ -8,564 +8,541 @@
     <!-- middle -->
     <div class="container">
         <!-- 路径导航栏 -->
-        <el-row>
-            <el-col :span="24">
-                <div class="grid-content bg-base" >
-                    <el-breadcrumb separator="/">
-                        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                        <el-breadcrumb-item>衣橱管理</el-breadcrumb-item>
-                    </el-breadcrumb>
-                </div>
-            </el-col>
-        </el-row>
+        <div class="grid-content bg-base" >
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>衣橱管理</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
         <!-- 路径导航栏 /- -->
 
         <!-- title -->
         <el-row>
             <el-col :span="24" class="center title">
                 <p><h>衣橱管理</h></p>
-                <p>WARDROBE MANAGER</p>
-                <img src="styles/imgs/section-seprator.png"/>
+                <p>WARDROBE MANAGEMENT</p>
+                <img src="res/imgs/section-seprator.png"/>
             </el-col>
         </el-row>
         <!-- title /- -->
 
         <!-- section -->
-        <el-row>
-            <el-col :span="24">
-                <div class="grid-content bg-white">
-                    <el-tabs v-model="activeName2" type="card" @tab-click="handleClick">
-                        <el-tab-pane label="全部" name="first">
-                        <!-- 1 Start -->
-                            <!--筛选条件-->
-                            <el-row>
-                                <el-col :span="18">
-                                    <div class="grid-content bg-white">
-                                        <el-form :inline="true" :model="Conditions">
-                                            <el-form-item label="购入时间">
-                                                <el-select v-model="Conditions.purcher_time" placeholder="购入时间">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="三个月内" value="b"></el-option>
-                                                    <el-option label="半年内" value="c"></el-option>
-                                                    <el-option label="一年内" value="d"></el-option>
-                                                    <el-option label="两年内" value="e"></el-option>
-                                                    <el-option label="两年以上" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="季节">
-                                                <el-select v-model="Conditions.season" placeholder="季节">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="春秋" value="b"></el-option>
-                                                    <el-option label="夏" value="c"></el-option>
-                                                    <el-option label="冬" value="d"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="场合">
-                                                <el-select v-model="Conditions.occasion" placeholder="场合">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="工作" value="b"></el-option>
-                                                    <el-option label="休闲" value="c"></el-option>
-                                                    <el-option label="运动" value="d"></el-option>
-                                                    <el-option label="宴会" value="e"></el-option>
-                                                    <el-option label="其他" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="材质">
-                                                <el-select v-model="Conditions.material" placeholder="材质">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="羊毛" value="b"></el-option>
-                                                    <el-option label="丝绸" value="c"></el-option>
-                                                    <el-option label="羽绒" value="d"></el-option>
-                                                    <el-option label="棉麻" value="e"></el-option>
-                                                    <el-option label="其他" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="色系">
-                                                <el-select v-model="Conditions.color" placeholder="色系">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="浅色" value="b"></el-option>
-                                                    <el-option label="深色" value="c"></el-option>
-                                                    <el-option label="亮色" value="d"></el-option>
-                                                </el-select>
-                                            </el-form-item>
+        <el-tabs v-model="activeManage" type="card" @tab-click="handleClickManage">
+            <el-tab-pane label="全部" name="first">
+                <!-- 1 Start --><!--查看全部-->
+                <div id="s1">
+                    <!--筛选条件-->
+                    <div>
+                        <div class="fluid">
+                            <el-form :inline="true" :model="Conditions">
+                                <el-form-item label="购入时间">
+                                    <el-select v-model="Conditions.purcher_time" placeholder="购入时间">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="三个月内" value="b"></el-option>
+                                        <el-option label="半年内" value="c"></el-option>
+                                        <el-option label="一年内" value="d"></el-option>
+                                        <el-option label="两年内" value="e"></el-option>
+                                        <el-option label="两年以上" value="f"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="季节">
+                                    <el-select v-model="Conditions.season" placeholder="季节">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="春秋" value="b"></el-option>
+                                        <el-option label="夏" value="c"></el-option>
+                                        <el-option label="冬" value="d"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="场合">
+                                    <el-select v-model="Conditions.occasion" placeholder="场合">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="工作" value="b"></el-option>
+                                        <el-option label="休闲" value="c"></el-option>
+                                        <el-option label="运动" value="d"></el-option>
+                                        <el-option label="宴会" value="e"></el-option>
+                                        <el-option label="其他" value="f"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="材质">
+                                    <el-select v-model="Conditions.material" placeholder="材质">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="羊毛" value="b"></el-option>
+                                        <el-option label="丝绸" value="c"></el-option>
+                                        <el-option label="羽绒" value="d"></el-option>
+                                        <el-option label="棉麻" value="e"></el-option>
+                                        <el-option label="其他" value="f"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="色系">
+                                    <el-select v-model="Conditions.color" placeholder="色系">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="浅色" value="b"></el-option>
+                                        <el-option label="深色" value="c"></el-option>
+                                        <el-option label="亮色" value="d"></el-option>
+                                    </el-select>
+                                </el-form-item>
 
-                                        </el-form>
+                            </el-form>
+                        </div>
+                        <div class="fluid">
+                            <!-- `checked` 为 true 或 false -->
+                            <el-checkbox v-model="cleaning">待清理</el-checkbox>
+                            <!-- `checked` 为 true 或 false -->
+                            <el-checkbox v-model="selling">待出售</el-checkbox>
+                        </div>
+                        <el-button type="primary" @click="screenQuery">查询</el-button>
+                    </div>
+                    <!-- icon plus -->
+                    <div class="left">
+                        <a href=""><i class="el-icon-plus"></i></a>
+                    </div>
+                    <!--商品陈列-->
+                    <el-row>
+                        <!--存在问题：不打头开始排列-->
+                        <el-col :span="4" v-for="(o, index) in 5" :offset="index > 0 ? 1 : 0">
+                            <el-card :body-style="{ padding: '0px' }">
+                                <!--点击图片跳转至详情查看-->
+                                <a><img src="res/imgs/blog-1.jpg" alt="item"></a>
+                                <div class="st1">
+                                    <div class="clearfix bottom">
+                                        <el-button type="primary" @click="isShowLike = true"><i class="el-icon-star-off"></i></el-button>
+                                        <el-dialog class="left" title="提示" v-model="isShowLike" size="tiny">
+                                            <span>确认添加到"最喜欢"</span>
+                                            <span slot="footer" class="dialog-footer">
+                                                            <el-button @click="isShowLike = false">取 消</el-button>
+                                                            <el-button type="primary" @click="isShowLike = false">确 定</el-button>
+                                                        </span>
+                                        </el-dialog>
+                                        <el-button type="primary" @click="isShowMarket = true"><a>二</a></el-button>
+                                        <el-dialog class="left" title="发布到二手市场" v-model="isShowMarket" size="tiny">
+                                            <!--这里需要增加一个判断值不为空的函数-->
+                                            <span>出售价格：￥<el-input class="sale" v-model="input" placeholder="请输入内容"></el-input></span>
+                                            <span slot="footer" class="dialog-footer">
+                                                    <el-button @click="isShowMarket = false">取 消</el-button>
+                                                    <el-button type="primary" @click="isShowMarket = false">确 定</el-button>
+                                                </span>
+                                        </el-dialog>
+                                        <el-button type="primary" @click="isShowClean = true"><i class="el-icon-delete"></i></el-button>
+                                        <el-dialog class="left" title="提示" v-model="isShowClean" size="tiny">
+                                            <span>确认添加到""待清理</span>
+                                            <span slot="footer">
+                                                    <el-button @click="isShowClean = false">取 消</el-button>
+                                                    <el-button type="primary" @click="isShowClean = false">确 定</el-button>
+                                                </span>
+                                        </el-dialog>
                                     </div>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                </div>
+                <!-- 1 End -->
+                <!-- 2 Start --><!--添加新衣-->
+                <el-row id="s2">
+                    <!--上传图片-->
+                    <el-col :span="7" :offset="2">
+                        <el-card :body-style="{ padding: '0px' }">
+                            <el-upload
+                                    class="avatar-uploader"
+                                    action="https://jsonplaceholder.typicode.com/posts/"
+                                    drag
+                                    :show-file-list="false"
+                                    :on-success="handleAvatarSuccess"
+                                    :before-upload="beforeAvatarUpload">
+                                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-card>
+                    </el-col>
+                    <!--填写表单-->
+                    <el-col :span="13" :offset="2">
+                        <el-form class="tab_form" inline="true" ref="form" :model="form">
+                            <el-form-item label="购入时间">
+                                <el-col :span="22">
+                                    <el-date-picker type="month" placeholder="选择月" v-model="form.month" style="width: 100%;"></el-date-picker>
                                 </el-col>
-                                <el-col :span="4">
-                                    <div class="grid-content bg-white btn-down">
-                                        <!-- `checked` 为 true 或 false -->
-                                        <el-checkbox v-model="checked1">待清理</el-checkbox>
-                                        <!-- `checked` 为 true 或 false -->
-                                        <el-checkbox v-model="checked2">待出售</el-checkbox>
-                                    </div>
-                                </el-col>
-                                <el-col class="right" :span="2">
-                                    <el-button type="primary" @click="onSubmit">查询</el-button>
-                                </el-col>
-
-                            </el-row>
-                            <!-- icon plus -->
-                            <el-row class="left">
-                                <a href="page_2_03.html"><i class="el-icon-plus"></i></a>
-                            </el-row>
-                            <!--商品陈列-->
-                            <el-row>
-                                <el-col :span="4" v-for="(o, index) in 5" :offset="index > 0 ? 1 : 0">
-                                    <el-card :body-style="{ padding: '0px' }">
-                                        <a href="page_2_04.html"><img src="styles/imgs/blog-1.jpg" alt="item"></a>
-                                        <div class="st1">
-                                            <div class="bottom clearfix">
-                                                <el-button type="primary" @click="dialogVisible4 = true"><i class="el-icon-star-off"></i></el-button>
-                                                <el-dialog class="left" title="提示" v-model="dialogVisible4" size="tiny">
-                                                    <span>确认添加到"最喜欢"</span>
-                                                    <span slot="footer" class="dialog-footer">
+                                <el-col class="line" :span="2"></el-col>
+                            </el-form-item>
+                            <el-form-item label="季节">
+                                <el-select v-model="form.season" placeholder="季节">
+                                    <el-option label="不限" value="a"></el-option>
+                                    <el-option label="春秋" value="b"></el-option>
+                                    <el-option label="夏" value="c"></el-option>
+                                    <el-option label="冬" value="d"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="材质">
+                                <el-select v-model="form.material" placeholder="材质">
+                                    <el-option label="不限" value="a"></el-option>
+                                    <el-option label="羊毛" value="b"></el-option>
+                                    <el-option label="丝绸" value="c"></el-option>
+                                    <el-option label="羽绒" value="d"></el-option>
+                                    <el-option label="棉麻" value="e"></el-option>
+                                    <el-option label="其他" value="f"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="适用场合">
+                                <el-select v-model="form.occasion" placeholder="适用场合">
+                                    <el-option label="不限" value="a"></el-option>
+                                    <el-option label="工作" value="b"></el-option>
+                                    <el-option label="休闲" value="c"></el-option>
+                                    <el-option label="运动" value="d"></el-option>
+                                    <el-option label="宴会" value="e"></el-option>
+                                    <el-option label="其他" value="f"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="色系">
+                                <el-select v-model="form.color" placeholder="色系">
+                                    <el-option label="不限" value="a"></el-option>
+                                    <el-option label="浅色" value="b"></el-option>
+                                    <el-option label="深色" value="c"></el-option>
+                                    <el-option label="亮色" value="d"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="尺码">
+                                <el-input v-model="form.size" placeholder="XS/S/M/L/XL"></el-input>
+                            </el-form-item>
+                            <el-form-item label="其他说明">
+                                <el-input type="textarea" v-model="form.desc" placeholder="其他说明"></el-input>
+                            </el-form-item>
+                            <div class="foot">
+                                <el-form-item>
+                                    <el-button type="primary" @click="clothAdd"><span>添加</span></el-button>
+                                    <el-button><span>取消</span></el-button>
+                                </el-form-item>
+                            </div>
+                        </el-form>
+                    </el-col>
+                </el-row>
+                <!-- 2 End -->
+                <!-- 3 Start --><!--修改-->
+                <el-row>
+                    <el-col :span="7" :offset="2" :offset="index > 0 ? 2 : 0">
+                        <el-card :body-style="{ padding: '0px' }">
+                            <img src="res/imgs/blog-1.jpg">
+                            <div class="st1">
+                                <div class="bottom clearfix">
+                                    <el-button type="primary" :disabled="true" @click="dialogVisible4 = true"><i class="el-icon-star-off"></i>喜欢</el-button>
+                                    <el-dialog class="left" title="提示" v-model="dialogVisible4" size="tiny">
+                                        <span>确认添加到"最喜欢"</span>
+                                        <span slot="footer" class="dialog-footer">
                                                                     <el-button @click="dialogVisible4 = false">取 消</el-button>
                                                                     <el-button type="primary" @click="dialogVisible4 = false">确 定</el-button>
                                                                 </span>
-                                                </el-dialog>
-                                                <el-button type="primary" @click="dialogVisible5 = true"><a>二</a></el-button>
-                                                <el-dialog class="left" title="发布到二手市场" v-model="dialogVisible5" size="tiny">
-                                                    <!--这里需要增加一个判断值不为空的函数-->
-                                                    <span>出售价格：￥<el-input class="sale" v-model="input" placeholder="请输入内容"></el-input></span>
-                                                    <span slot="footer" class="dialog-footer">
+                                    </el-dialog>
+                                    <el-button type="primary" :disabled="true" @click="dialogVisible5 = true"><a>二手市场</a></el-button>
+                                    <el-dialog class="left" title="发布到二手市场" v-model="dialogVisible5" size="tiny">
+                                        <!--这里需要增加一个判断值不为空的函数-->
+                                        <span>出售价格：￥<el-input class="sale" v-model="input" placeholder="请输入内容"></el-input></span>
+                                        <span slot="footer" class="dialog-footer">
                                                                 <el-button @click="dialogVisible5 = false">取 消</el-button>
                                                                 <el-button type="primary" @click="dialogVisible5 = false">确 定</el-button>
                                                             </span>
-                                                </el-dialog>
-                                                <el-button type="primary" @click="dialogVisible6 = true"><i class="el-icon-delete"></i></el-button>
-                                                <el-dialog class="left" title="提示" v-model="dialogVisible6" size="tiny">
-                                                    <span>确认添加到""待清理</span>
-                                                    <span slot="footer" class="dialog-footer">
+                                    </el-dialog>
+                                    <el-button type="primary" :disabled="true" @click="dialogVisible6 = true"><i class="el-icon-delete"></i>清理</el-button>
+                                    <el-dialog class="left" title="提示" v-model="dialogVisible6" size="tiny">
+                                        <span>确认添加到""待清理</span>
+                                        <span slot="footer" class="dialog-footer">
                                                                     <el-button @click="dialogVisible6 = false">取 消</el-button>
                                                                     <el-button type="primary" @click="dialogVisible6 = false">确 定</el-button>
                                                             </span>
-                                                </el-dialog>
-                                            </div>
-                                        </div>
-                                    </el-card>
+                                    </el-dialog>
+                                </div>
+                            </div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="13" :offset="2">
+                        <el-form class=tab_form inline="true" ref="form" :model="form">
+                            <el-form-item label="购入时间">
+                                <el-col :span="22">
+                                    <el-date-picker type="month" placeholder="选择月" v-model="form.month"></el-date-picker>
                                 </el-col>
-                            </el-row>
-                        <!-- 1 End -->
-                        <!-- 2 Start -->
-                            <!--查看详情-->
-                            <el-row>
-                                <!--显示图片-->
-                                <el-col :span="7" :offset="2" v-for="(o, index) in 1" :offset="index > 0 ? 2 : 0">
-                                    <el-card :body-style="{ padding: '0px' }">
-                                        <img src="styles/imgs/blog-1.jpg">
-                                        <div class="st1">
-                                            <div class="bottom clearfix">
-                                                <el-button type="primary" @click="dialogVisible4 = true"><i class="el-icon-star-off"></i>喜欢</el-button>
-                                                <el-dialog class="left" title="提示" v-model="dialogVisible4" size="tiny">
-                                                    <span>确认添加到"最喜欢"</span>
-                                                    <span slot="footer" class="dialog-footer">
-                                                                <el-button @click="dialogVisible4 = false">取 消</el-button>
-                                                                <el-button type="primary" @click="dialogVisible4 = false">确 定</el-button>
-                                                            </span>
-                                                </el-dialog>
-                                                <el-button type="primary" @click="dialogVisible5 = true"><a>二手市场</a></el-button>
-                                                <el-dialog class="left" title="发布到二手市场" v-model="dialogVisible5" size="tiny">
-                                                    <!--这里需要增加一个判断值不为空的函数-->
-                                                    <span>出售价格：￥<el-input class="sale" v-model="input" placeholder="请输入内容"></el-input></span>
-                                                    <span slot="footer" class="dialog-footer">
-                                                            <el-button @click="dialogVisible5 = false">取 消</el-button>
-                                                            <el-button type="primary" @click="dialogVisible5 = false">确 定</el-button>
-                                                        </span>
-                                                </el-dialog>
-                                                <el-button type="primary" @click="dialogVisible6 = true"><i class="el-icon-delete"></i>清理</el-button>
-                                                <el-dialog class="left" title="提示" v-model="dialogVisible6" size="tiny">
-                                                    <span>确认添加到""待清理</span>
-                                                    <span slot="footer" class="dialog-footer">
-                                                                <el-button @click="dialogVisible6 = false">取 消</el-button>
-                                                                <el-button type="primary" @click="dialogVisible6 = false">确 定</el-button>
-                                                        </span>
-                                                </el-dialog>
-                                            </div>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <!--显示表单-->
-                                <el-col :span="13" :offset="2">
-                                    <el-form class="tab_form" inline="true" ref="form" :model="form">
-                                        <!-- 表单数据如何获取？ -->
-                                        <el-form-item label="购入时间">
-                                            <!--<el-date-picker type="month" placeholder="选择月" v-model="form.month" style="width: 100%;"></el-date-picker>-->
-                                            <a>2017.3.1</a>
-                                        </el-form-item>
-                                        <el-form-item label="季节">
-                                            <!--<el-select v-model="form.season" placeholder="季节">-->
-                                            <!--<el-option label="不限" value="a"></el-option>-->
-                                            <!--<el-option label="春秋" value="b"></el-option>-->
-                                            <!--<el-option label="夏" value="c"></el-option>-->
-                                            <!--<el-option label="冬" value="d"></el-option>-->
-                                            <!--</el-select>-->
-                                            <a>春秋</a>
-                                        </el-form-item>
-                                        <el-form-item label="材质">
-                                            <!--<el-select v-model="form.material" placeholder="材质">-->
-                                            <!--<el-option label="不限" value="a"></el-option>-->
-                                            <!--<el-option label="羊毛" value="b"></el-option>-->
-                                            <!--<el-option label="丝绸" value="c"></el-option>-->
-                                            <!--<el-option label="羽绒" value="d"></el-option>-->
-                                            <!--<el-option label="棉麻" value="e"></el-option>-->
-                                            <!--<el-option label="其他" value="f"></el-option>-->
-                                            <!--</el-select>-->
-                                            <a>棉麻</a>
-                                        </el-form-item>
-                                        <el-form-item label="适用场合">
-                                            <!--<el-select v-model="form.occasion" placeholder="适用场合">-->
-                                            <!--<el-option label="不限" value="a"></el-option>-->
-                                            <!--<el-option label="工作" value="b"></el-option>-->
-                                            <!--<el-option label="休闲" value="c"></el-option>-->
-                                            <!--<el-option label="运动" value="d"></el-option>-->
-                                            <!--<el-option label="宴会" value="e"></el-option>-->
-                                            <!--<el-option label="其他" value="f"></el-option>-->
-                                            <!--</el-select>-->
-                                            <a>休闲</a>
-                                        </el-form-item>
-                                        <el-form-item label="色系">
-                                            <!--<el-select v-model="form.color" placeholder="色系">-->
-                                            <!--<el-option label="不限" value="a"></el-option>-->
-                                            <!--<el-option label="浅色" value="b"></el-option>-->
-                                            <!--<el-option label="深色" value="c"></el-option>-->
-                                            <!--<el-option label="亮色" value="d"></el-option>-->
-                                            <!--</el-select>-->
-                                            <a>浅色</a>
-                                        </el-form-item>
-                                        <el-form-item label="尺码">
-                                            <!--<el-input v-model="form.size" placeholder="XS/S/M/L/XL"></el-input>-->
-                                            <a>M</a>
-                                        </el-form-item>
-                                        <el-form-item label="其他说明">
-                                            <!--<el-input type="textarea" v-model="form.desc" placeholder="其他说明"></el-input>-->
-                                            <a>不能机洗</a>
-                                        </el-form-item>
-                                        <div class="foot">
-                                            <el-button type="primary" @click="onSubmit4">修改</el-button>
-                                        </div>
-                                    </el-form>
-                                </el-col>
-                            </el-row>
-                        <!-- 2 End -->
-                        <!-- 3 Start -->
-                            <!--修改-->
-                            <el-row>
-                                <el-col :span="7" :offset="2" v-for="(o, index) in 1" :offset="index > 0 ? 2 : 0">
-                                    <el-card :body-style="{ padding: '0px' }">
-                                        <img src="styles/imgs/blog-1.jpg">
-                                        <div class="st1">
-                                            <div class="bottom clearfix">
-                                                <el-button type="primary" :disabled="true" @click="dialogVisible4 = true"><i class="el-icon-star-off"></i>喜欢</el-button>
-                                                <el-dialog class="left" title="提示" v-model="dialogVisible4" size="tiny">
-                                                    <span>确认添加到"最喜欢"</span>
-                                                    <span slot="footer" class="dialog-footer">
-                                                                <el-button @click="dialogVisible4 = false">取 消</el-button>
-                                                                <el-button type="primary" @click="dialogVisible4 = false">确 定</el-button>
-                                                            </span>
-                                                </el-dialog>
-                                                <el-button type="primary" :disabled="true" @click="dialogVisible5 = true"><a>二手市场</a></el-button>
-                                                <el-dialog class="left" title="发布到二手市场" v-model="dialogVisible5" size="tiny">
-                                                    <!--这里需要增加一个判断值不为空的函数-->
-                                                    <span>出售价格：￥<el-input class="sale" v-model="input" placeholder="请输入内容"></el-input></span>
-                                                    <span slot="footer" class="dialog-footer">
-                                                            <el-button @click="dialogVisible5 = false">取 消</el-button>
-                                                            <el-button type="primary" @click="dialogVisible5 = false">确 定</el-button>
-                                                        </span>
-                                                </el-dialog>
-                                                <el-button type="primary" :disabled="true" @click="dialogVisible6 = true"><i class="el-icon-delete"></i>清理</el-button>
-                                                <el-dialog class="left" title="提示" v-model="dialogVisible6" size="tiny">
-                                                    <span>确认添加到""待清理</span>
-                                                    <span slot="footer" class="dialog-footer">
-                                                                <el-button @click="dialogVisible6 = false">取 消</el-button>
-                                                                <el-button type="primary" @click="dialogVisible6 = false">确 定</el-button>
-                                                        </span>
-                                                </el-dialog>
-                                            </div>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="13" :offset="2">
-                                    <el-form class=tab_form inline="true" ref="form" :model="form">
-                                        <el-form-item label="购入时间">
-                                            <el-col :span="22">
-                                                <el-date-picker type="month" placeholder="选择月" v-model="form.month" style="width: 100%;"></el-date-picker>
-                                            </el-col>
-                                            <el-col class="line" :span="2"></el-col>
-                                        </el-form-item>
-                                        <el-form-item label="季节">
-                                            <el-select v-model="form.season" placeholder="季节">
-                                                <el-option label="不限" value="a"></el-option>
-                                                <el-option label="春秋" value="b"></el-option>
-                                                <el-option label="夏" value="c"></el-option>
-                                                <el-option label="冬" value="d"></el-option>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="材质">
-                                            <el-select v-model="form.material" placeholder="材质">
-                                                <el-option label="不限" value="a"></el-option>
-                                                <el-option label="羊毛" value="b"></el-option>
-                                                <el-option label="丝绸" value="c"></el-option>
-                                                <el-option label="羽绒" value="d"></el-option>
-                                                <el-option label="棉麻" value="e"></el-option>
-                                                <el-option label="其他" value="f"></el-option>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="适用场合">
-                                            <el-select v-model="form.occasion" placeholder="适用场合">
-                                                <el-option label="不限" value="a"></el-option>
-                                                <el-option label="工作" value="b"></el-option>
-                                                <el-option label="休闲" value="c"></el-option>
-                                                <el-option label="运动" value="d"></el-option>
-                                                <el-option label="宴会" value="e"></el-option>
-                                                <el-option label="其他" value="f"></el-option>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="色系">
-                                            <el-select v-model="form.color" placeholder="色系">
-                                                <el-option label="不限" value="a"></el-option>
-                                                <el-option label="浅色" value="b"></el-option>
-                                                <el-option label="深色" value="c"></el-option>
-                                                <el-option label="亮色" value="d"></el-option>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="尺码">
-                                            <el-input v-model="form.size" placeholder="XS/S/M/L/XL"></el-input>
-                                        </el-form-item>
-                                        <el-form-item label="其他说明">
-                                            <el-input type="textarea" v-model="form.desc" placeholder="其他说明"></el-input>
-                                        </el-form-item>
-                                        <div class="foot">
-                                            <el-form-item>
-                                                <el-button type="primary" @click="onSubmit2"><span>确定</span></el-button>
-                                                <el-button><span>取消</span></el-button>
-                                            </el-form-item>
-                                        </div>
-                                    </el-form>
-                                </el-col>
-                            </el-row>
-                        <!-- 3 End -->
-                        <!-- 4 Start -->
-                            <!--添加新衣-->
-                            <el-row>
-                                <!--上传图片-->
-                                <el-col :span="7" :offset="2" v-for="(o, index) in 1" :offset="index > 0 ? 2 : 0">
-                                    <el-card :body-style="{ padding: '0px' }">
-                                        <el-upload
-                                                class="avatar-uploader"
-                                                action="https://jsonplaceholder.typicode.com/posts/"
-                                                drag
-                                                :show-file-list="false"
-                                                :on-success="handleAvatarSuccess"
-                                                :before-upload="beforeAvatarUpload">
-                                            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                                        </el-upload>
-                                    </el-card>
-                                </el-col>
-                                <!--填写表单-->
-                                <el-col :span="13" :offset="2">
-                                    <el-form class="tab_form" inline="true" ref="form" :model="form">
-                                        <el-form-item label="购入时间">
-                                            <el-col :span="22">
-                                                <el-date-picker type="month" placeholder="选择月" v-model="form.month" style="width: 100%;"></el-date-picker>
-                                            </el-col>
-                                            <el-col class="line" :span="2"></el-col>
-                                        </el-form-item>
-                                        <el-form-item label="季节">
-                                            <el-select v-model="form.season" placeholder="季节">
-                                                <el-option label="不限" value="a"></el-option>
-                                                <el-option label="春秋" value="b"></el-option>
-                                                <el-option label="夏" value="c"></el-option>
-                                                <el-option label="冬" value="d"></el-option>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="材质">
-                                            <el-select v-model="form.material" placeholder="材质">
-                                                <el-option label="不限" value="a"></el-option>
-                                                <el-option label="羊毛" value="b"></el-option>
-                                                <el-option label="丝绸" value="c"></el-option>
-                                                <el-option label="羽绒" value="d"></el-option>
-                                                <el-option label="棉麻" value="e"></el-option>
-                                                <el-option label="其他" value="f"></el-option>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="适用场合">
-                                            <el-select v-model="form.occasion" placeholder="适用场合">
-                                                <el-option label="不限" value="a"></el-option>
-                                                <el-option label="工作" value="b"></el-option>
-                                                <el-option label="休闲" value="c"></el-option>
-                                                <el-option label="运动" value="d"></el-option>
-                                                <el-option label="宴会" value="e"></el-option>
-                                                <el-option label="其他" value="f"></el-option>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="色系">
-                                            <el-select v-model="form.color" placeholder="色系">
-                                                <el-option label="不限" value="a"></el-option>
-                                                <el-option label="浅色" value="b"></el-option>
-                                                <el-option label="深色" value="c"></el-option>
-                                                <el-option label="亮色" value="d"></el-option>
-                                            </el-select>
-                                        </el-form-item>
-                                        <el-form-item label="尺码">
-                                            <el-input v-model="form.size" placeholder="XS/S/M/L/XL"></el-input>
-                                        </el-form-item>
-                                        <el-form-item label="其他说明">
-                                            <el-input type="textarea" v-model="form.desc" placeholder="其他说明"></el-input>
-                                        </el-form-item>
-                                        <div class="foot">
-                                            <el-form-item>
-                                                <el-button type="primary" @click="onSubmit3"><span>添加</span></el-button>
-                                                <el-button><span>取消</span></el-button>
-                                            </el-form-item>
-                                        </div>
-                                    </el-form>
-                                </el-col>
-                            </el-row>
-                        <!-- 4 End -->
-                        </el-tab-pane>
+                                <el-col class="line" :span="2"></el-col>
+                            </el-form-item>
+                            <el-form-item label="季节">
+                                <el-select v-model="form.season" placeholder="季节">
+                                    <el-option label="不限" value="a"></el-option>
+                                    <el-option label="春秋" value="b"></el-option>
+                                    <el-option label="夏" value="c"></el-option>
+                                    <el-option label="冬" value="d"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="材质">
+                                <el-select v-model="form.material" placeholder="材质">
+                                    <el-option label="不限" value="a"></el-option>
+                                    <el-option label="羊毛" value="b"></el-option>
+                                    <el-option label="丝绸" value="c"></el-option>
+                                    <el-option label="羽绒" value="d"></el-option>
+                                    <el-option label="棉麻" value="e"></el-option>
+                                    <el-option label="其他" value="f"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="适用场合">
+                                <el-select v-model="form.occasion" placeholder="适用场合">
+                                    <el-option label="不限" value="a"></el-option>
+                                    <el-option label="工作" value="b"></el-option>
+                                    <el-option label="休闲" value="c"></el-option>
+                                    <el-option label="运动" value="d"></el-option>
+                                    <el-option label="宴会" value="e"></el-option>
+                                    <el-option label="其他" value="f"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="色系">
+                                <el-select v-model="form.color" placeholder="色系">
+                                    <el-option label="不限" value="a"></el-option>
+                                    <el-option label="浅色" value="b"></el-option>
+                                    <el-option label="深色" value="c"></el-option>
+                                    <el-option label="亮色" value="d"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="尺码">
+                                <el-input v-model="form.size" placeholder="XS/S/M/L/XL"></el-input>
+                            </el-form-item>
+                            <el-form-item label="其他说明">
+                                <el-input type="textarea" v-model="form.desc" placeholder="其他说明"></el-input>
+                            </el-form-item>
+                            <div class="foot">
+                                <el-form-item>
+                                    <el-button type="primary" @click="onSubmit2"><span>确定</span></el-button>
+                                    <el-button><span>取消</span></el-button>
+                                </el-form-item>
+                            </div>
+                        </el-form>
+                    </el-col>
+                </el-row>
+                <!-- 3 End -->
+                <!-- 4 Start --><!--查看详情-->
+                <el-row>
+                    <!--显示图片-->
+                    <el-col :span="7" :offset="2" v-for="(o, index) in 1" :offset="index > 0 ? 2 : 0">
+                        <el-card :body-style="{ padding: '0px' }">
+                            <img src="res/imgs/blog-1.jpg">
+                            <div class="st1">
+                                <div class="bottom clearfix">
+                                    <el-button type="primary" @click="isShowLike = true"><i class="el-icon-star-off"></i>喜欢</el-button>
+                                    <el-dialog class="left" title="提示" v-model="isShowLike" size="tiny">
+                                        <span>确认添加到"最喜欢"</span>
+                                        <span slot="footer" class="dialog-footer">
+                                                    <el-button @click="isShowLike = false">取 消</el-button>
+                                                    <el-button type="primary" @click="isShowLike = false">确 定</el-button>
+                                                </span>
+                                    </el-dialog>
+                                    <el-button type="primary" @click="isShowMarket = true"><a>二手市场</a></el-button>
+                                    <el-dialog class="left" title="发布到二手市场" v-model="isShowMarket" size="tiny">
+                                        <!--这里需要增加一个判断值不为空的函数-->
+                                        <span>出售价格：￥<el-input class="sale" v-model="input" placeholder="请输入内容"></el-input></span>
+                                        <span slot="footer" class="dialog-footer">
+                                                    <el-button @click="isShowMarket = false">取 消</el-button>
+                                                    <el-button type="primary" @click="isShowMarket = false">确 定</el-button>
+                                                </span>
+                                    </el-dialog>
+                                    <el-button type="primary" @click="isShowClean = true"><i class="el-icon-delete"></i>清理</el-button>
+                                    <el-dialog class="left" title="提示" v-model="isShowClean" size="tiny">
+                                        <span>确认添加到""待清理</span>
+                                        <span slot="footer" class="dialog-footer">
+                                                    <el-button @click="isShowClean = false">取 消</el-button>
+                                                    <el-button type="primary" @click="isShowClean = false">确 定</el-button>
+                                                </span>
+                                    </el-dialog>
+                                </div>
+                            </div>
+                        </el-card>
+                    </el-col>
+                    <!--显示表单-->
+                    <el-col :span="13" :offset="2">
+                        <el-form class="tab_form" inline="true" ref="form" :model="form">
+                            <!-- 表单数据如何获取？ -->
+                            <el-form-item label="购入时间">
+                                <!--<el-date-picker type="month" placeholder="选择月" v-model="form.month" style="width: 100%;"></el-date-picker>-->
+                                <a>2017.3.1</a>
+                            </el-form-item>
+                            <el-form-item label="季节">
+                                <!--<el-select v-model="form.season" placeholder="季节">-->
+                                <!--<el-option label="不限" value="a"></el-option>-->
+                                <!--<el-option label="春秋" value="b"></el-option>-->
+                                <!--<el-option label="夏" value="c"></el-option>-->
+                                <!--<el-option label="冬" value="d"></el-option>-->
+                                <!--</el-select>-->
+                                <a>春秋</a>
+                            </el-form-item>
+                            <el-form-item label="材质">
+                                <!--<el-select v-model="form.material" placeholder="材质">-->
+                                <!--<el-option label="不限" value="a"></el-option>-->
+                                <!--<el-option label="羊毛" value="b"></el-option>-->
+                                <!--<el-option label="丝绸" value="c"></el-option>-->
+                                <!--<el-option label="羽绒" value="d"></el-option>-->
+                                <!--<el-option label="棉麻" value="e"></el-option>-->
+                                <!--<el-option label="其他" value="f"></el-option>-->
+                                <!--</el-select>-->
+                                <a>棉麻</a>
+                            </el-form-item>
+                            <el-form-item label="适用场合">
+                                <!--<el-select v-model="form.occasion" placeholder="适用场合">-->
+                                <!--<el-option label="不限" value="a"></el-option>-->
+                                <!--<el-option label="工作" value="b"></el-option>-->
+                                <!--<el-option label="休闲" value="c"></el-option>-->
+                                <!--<el-option label="运动" value="d"></el-option>-->
+                                <!--<el-option label="宴会" value="e"></el-option>-->
+                                <!--<el-option label="其他" value="f"></el-option>-->
+                                <!--</el-select>-->
+                                <a>休闲</a>
+                            </el-form-item>
+                            <el-form-item label="色系">
+                                <!--<el-select v-model="form.color" placeholder="色系">-->
+                                <!--<el-option label="不限" value="a"></el-option>-->
+                                <!--<el-option label="浅色" value="b"></el-option>-->
+                                <!--<el-option label="深色" value="c"></el-option>-->
+                                <!--<el-option label="亮色" value="d"></el-option>-->
+                                <!--</el-select>-->
+                                <a>浅色</a>
+                            </el-form-item>
+                            <el-form-item label="尺码">
+                                <!--<el-input v-model="form.size" placeholder="XS/S/M/L/XL"></el-input>-->
+                                <a>M</a>
+                            </el-form-item>
+                            <el-form-item label="其他说明">
+                                <!--<el-input type="textarea" v-model="form.desc" placeholder="其他说明"></el-input>-->
+                                <a>不能机洗</a>
+                            </el-form-item>
+                            <div class="foot">
+                                <el-button type="primary" @click="onSubmit4">修改</el-button>
+                            </div>
+                        </el-form>
+                    </el-col>
+                </el-row>
+                <!-- 4 End -->
 
-                        <el-tab-pane label="最喜欢" name="second">
-                            <el-row>
-                                <el-col :span="18">
-                                    <div class="grid-content bg-white">
-                                        <el-form :inline="true" :model="Conditions" class="demo-form-inline">
-                                            <el-form-item label="购入时间">
-                                                <el-select class="el-form-item__content" v-model="Conditions.purcher_time" placeholder="购入时间">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="三个月内" value="b"></el-option>
-                                                    <el-option label="半年内" value="c"></el-option>
-                                                    <el-option label="一年内" value="d"></el-option>
-                                                    <el-option label="两年内" value="e"></el-option>
-                                                    <el-option label="两年以上" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="季节">
-                                                <el-select class="el-form-item__content" v-model="Conditions.season" placeholder="季节">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="春秋" value="b"></el-option>
-                                                    <el-option label="夏" value="c"></el-option>
-                                                    <el-option label="冬" value="d"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="场合">
-                                                <el-select class="el-form-item__content" v-model="Conditions.occasion" placeholder="场合">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="工作" value="b"></el-option>
-                                                    <el-option label="休闲" value="c"></el-option>
-                                                    <el-option label="运动" value="d"></el-option>
-                                                    <el-option label="宴会" value="e"></el-option>
-                                                    <el-option label="其他" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="材质">
-                                                <el-select class="el-form-item__content" v-model="Conditions.material" placeholder="材质">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="羊毛" value="b"></el-option>
-                                                    <el-option label="丝绸" value="c"></el-option>
-                                                    <el-option label="羽绒" value="d"></el-option>
-                                                    <el-option label="棉麻" value="e"></el-option>
-                                                    <el-option label="其他" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="色系">
-                                                <el-select class="el-form-item__content" v-model="Conditions.color" placeholder="色系">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="浅色" value="b"></el-option>
-                                                    <el-option label="深色" value="c"></el-option>
-                                                    <el-option label="亮色" value="d"></el-option>
-                                                </el-select>
-                                            </el-form-item>
+            </el-tab-pane>
 
-                                        </el-form>
-                                    </div>
-                                </el-col>
-                                <el-col class="right" :span="2" :offset="4">
-                                    <el-button type="primary" @click="onSubmit">查询</el-button>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-                                <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-                                <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-                                <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-                            </el-row>
-                        </el-tab-pane>
+            <el-tab-pane label="最喜欢" name="second">
+                <!--筛选条件，待需改-->
+                <el-row>
+                    <el-col :span="18">
+                        <div class="grid-content bg-white">
+                            <el-form :inline="true" :model="Conditions" class="demo-form-inline">
+                                <el-form-item label="购入时间">
+                                    <el-select class="el-form-item__content" v-model="Conditions.purcher_time" placeholder="购入时间">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="三个月内" value="b"></el-option>
+                                        <el-option label="半年内" value="c"></el-option>
+                                        <el-option label="一年内" value="d"></el-option>
+                                        <el-option label="两年内" value="e"></el-option>
+                                        <el-option label="两年以上" value="f"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="季节">
+                                    <el-select class="el-form-item__content" v-model="Conditions.season" placeholder="季节">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="春秋" value="b"></el-option>
+                                        <el-option label="夏" value="c"></el-option>
+                                        <el-option label="冬" value="d"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="场合">
+                                    <el-select class="el-form-item__content" v-model="Conditions.occasion" placeholder="场合">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="工作" value="b"></el-option>
+                                        <el-option label="休闲" value="c"></el-option>
+                                        <el-option label="运动" value="d"></el-option>
+                                        <el-option label="宴会" value="e"></el-option>
+                                        <el-option label="其他" value="f"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="材质">
+                                    <el-select class="el-form-item__content" v-model="Conditions.material" placeholder="材质">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="羊毛" value="b"></el-option>
+                                        <el-option label="丝绸" value="c"></el-option>
+                                        <el-option label="羽绒" value="d"></el-option>
+                                        <el-option label="棉麻" value="e"></el-option>
+                                        <el-option label="其他" value="f"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="色系">
+                                    <el-select class="el-form-item__content" v-model="Conditions.color" placeholder="色系">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="浅色" value="b"></el-option>
+                                        <el-option label="深色" value="c"></el-option>
+                                        <el-option label="亮色" value="d"></el-option>
+                                    </el-select>
+                                </el-form-item>
 
-                        <el-tab-pane label="待清理" name="fourth">
-                            <el-row>
-                                <el-col :span="18">
-                                    <div class="grid-content bg-white">
-                                        <el-form :inline="true" :model="Conditions" class="demo-form-inline">
-                                            <el-form-item label="购入时间">
-                                                <el-select class="el-form-item__content" v-model="Conditions.purcher_time" placeholder="购入时间">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="三个月内" value="b"></el-option>
-                                                    <el-option label="半年内" value="c"></el-option>
-                                                    <el-option label="一年内" value="d"></el-option>
-                                                    <el-option label="两年内" value="e"></el-option>
-                                                    <el-option label="两年以上" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="季节">
-                                                <el-select class="el-form-item__content" v-model="Conditions.season" placeholder="季节">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="春秋" value="b"></el-option>
-                                                    <el-option label="夏" value="c"></el-option>
-                                                    <el-option label="冬" value="d"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="场合">
-                                                <el-select class="el-form-item__content" v-model="Conditions.occasion" placeholder="场合">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="工作" value="b"></el-option>
-                                                    <el-option label="休闲" value="c"></el-option>
-                                                    <el-option label="运动" value="d"></el-option>
-                                                    <el-option label="宴会" value="e"></el-option>
-                                                    <el-option label="其他" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="材质">
-                                                <el-select class="el-form-item__content" v-model="Conditions.material" placeholder="材质">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="羊毛" value="b"></el-option>
-                                                    <el-option label="丝绸" value="c"></el-option>
-                                                    <el-option label="羽绒" value="d"></el-option>
-                                                    <el-option label="棉麻" value="e"></el-option>
-                                                    <el-option label="其他" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="色系">
-                                                <el-select class="el-form-item__content" v-model="Conditions.color" placeholder="色系">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="浅色" value="b"></el-option>
-                                                    <el-option label="深色" value="c"></el-option>
-                                                    <el-option label="亮色" value="d"></el-option>
-                                                </el-select>
-                                            </el-form-item>
+                            </el-form>
+                        </div>
+                    </el-col>
+                    <el-col class="right" :span="2" :offset="4">
+                        <el-button type="primary" @click="screenQuery">查询</el-button>
+                    </el-col>
+                </el-row>
+            </el-tab-pane>
 
-                                        </el-form>
-                                    </div>
-                                </el-col>
-                                <el-col class="right" :span="2" :offset="4">
-                                    <el-button type="primary" @click="onSubmit">查询</el-button>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-                                <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-                                <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-                                <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-                            </el-row>
-                        </el-tab-pane>
+            <el-tab-pane label="待清理" name="fourth">
+                <!--筛选条件，待修改-->
+                <el-row>
+                    <el-col :span="18">
+                        <div class="grid-content bg-white">
+                            <el-form :inline="true" :model="Conditions" class="demo-form-inline">
+                                <el-form-item label="购入时间">
+                                    <el-select class="el-form-item__content" v-model="Conditions.purcher_time" placeholder="购入时间">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="三个月内" value="b"></el-option>
+                                        <el-option label="半年内" value="c"></el-option>
+                                        <el-option label="一年内" value="d"></el-option>
+                                        <el-option label="两年内" value="e"></el-option>
+                                        <el-option label="两年以上" value="f"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="季节">
+                                    <el-select class="el-form-item__content" v-model="Conditions.season" placeholder="季节">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="春秋" value="b"></el-option>
+                                        <el-option label="夏" value="c"></el-option>
+                                        <el-option label="冬" value="d"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="场合">
+                                    <el-select class="el-form-item__content" v-model="Conditions.occasion" placeholder="场合">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="工作" value="b"></el-option>
+                                        <el-option label="休闲" value="c"></el-option>
+                                        <el-option label="运动" value="d"></el-option>
+                                        <el-option label="宴会" value="e"></el-option>
+                                        <el-option label="其他" value="f"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="材质">
+                                    <el-select class="el-form-item__content" v-model="Conditions.material" placeholder="材质">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="羊毛" value="b"></el-option>
+                                        <el-option label="丝绸" value="c"></el-option>
+                                        <el-option label="羽绒" value="d"></el-option>
+                                        <el-option label="棉麻" value="e"></el-option>
+                                        <el-option label="其他" value="f"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="色系">
+                                    <el-select class="el-form-item__content" v-model="Conditions.color" placeholder="色系">
+                                        <el-option label="不限" value="a"></el-option>
+                                        <el-option label="浅色" value="b"></el-option>
+                                        <el-option label="深色" value="c"></el-option>
+                                        <el-option label="亮色" value="d"></el-option>
+                                    </el-select>
+                                </el-form-item>
 
-                    </el-tabs>
-                </div>
-            </el-col>
-        </el-row>
+                            </el-form>
+                        </div>
+                    </el-col>
+                    <el-col class="right" :span="2" :offset="4">
+                        <el-button type="primary" @click="screenQuery">查询</el-button>
+                    </el-col>
+                </el-row>
+            </el-tab-pane>
+
+        </el-tabs>
+
         <!-- section /- -->
     </div>
     <!-- middle /- -->
+
 </body>
 </html>

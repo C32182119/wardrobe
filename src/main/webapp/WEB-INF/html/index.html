@@ -1,23 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<!-- middle -->
-<el-row>
-    <!-- board -->
-    <el-col :span="24">
-        <div class="container board_pic">
-            <div id="board_charactors">
-                <h1>NEW WAYS TO MANAGE YOUR CLOTHES</h1>
-                <p>衣服越来越多，你的衣橱是否因为疏于管理而变得混乱不堪？经常找不到你要的衣服？</p>
-                <p>希望能帮助你管理好你的衣橱！</p>
-                <div class="board_bt">
-                    <el-button type="primary" @click="onSubmit2"><span>开始衣橱管理吧！</span></el-button>
+<div id="index">
+    <!-- middle -->
+    <el-row>
+        <!-- board -->
+        <el-col :span="24">
+            <div class="container board_pic">
+                <div id="board_charactors">
+                    <h1>NEW WAYS TO MANAGE YOUR CLOTHES</h1>
+                    <p>衣服越来越多，你的衣橱是否因为疏于管理而变得混乱不堪？经常找不到你要的衣服？</p>
+                    <p>希望能帮助你管理好你的衣橱！</p>
+                    <div class="board_bt">
+                        <el-button type="primary" @click="start"><span>开始衣橱管理吧！</span></el-button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </el-col>
-    <!-- board /- -->
-</el-row>
-<!-- middle /- -->
-</body>
-</html>
+        </el-col>
+        <!-- board /- -->
+    </el-row>
+    <!-- middle /- -->
+</div>
+<script>
+	(function () {
+		new Vue({
+			el: "#index",
+			methods: {
+				start() {
+					mainJS.ajax.requestHtml('management', 'main');
+				}
+			}
+		});
+	})();
+</script>

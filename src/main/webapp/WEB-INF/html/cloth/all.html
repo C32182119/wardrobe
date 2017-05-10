@@ -1,0 +1,176 @@
+<div id="cloth-all">
+	<!--筛选条件-->
+	<el-form :inline="true" :model="conditions">
+				<el-form-item label="购入时间">
+					<el-select v-model="conditions.purcherTime" placeholder="购入时间">
+						<el-option
+								v-for="item in options.purcherTime"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value">
+						</el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item label="季节">
+					<el-select v-model="conditions.season" placeholder="季节">
+						<el-option
+								v-for="item in options.season"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value">
+						</el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item label="场合">
+					<el-select v-model="conditions.occasion" placeholder="场合">
+						<el-option
+								v-for="item in options.occasion"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value">
+						</el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item label="材质">
+					<el-select v-model="conditions.material" placeholder="材质">
+						<el-option
+								v-for="item in options.material"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value">
+						</el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item label="色系">
+					<el-select v-model="conditions.color" placeholder="色系">
+						<el-option
+								v-for="item in options.color"
+								:key="item.value"
+								:label="item.label"
+								:value="item.value">
+						</el-option>
+					</el-select>
+				</el-form-item>
+				<div class="cloth-all-group">
+					<el-form-item>
+						<!-- `checked` 为 true 或 false -->
+						<el-checkbox v-model="conditions.isCleaning">待清理</el-checkbox>
+						<!-- `checked` 为 true 或 false -->
+						<el-checkbox v-model="conditions.isSelling">待出售</el-checkbox>
+					</el-form-item>
+				</div>
+				<el-button type="primary" @click="queryClothByConditions">查询</el-button>
+			</el-form>
+
+	<!-- icon plus -->
+	<div class="cloth-add-icon">
+		<a href="javascript:mainJS.ajax.requestPartialHtml('cloth-add', 'cloth-all-content')"><i class="el-icon-plus"></i></a>
+	</div>
+
+	<div id="cloth-menu">
+		<!--商品陈列-->
+		<el-row>
+			<!--存在问题：不打头开始排列-->
+			<el-col :span="4" v-for="(o, index) in 5" :offset="index > 0 ? 1 : 0">
+				<el-card :body-style="{ padding: '0px' }">
+					<!--点击图片跳转至详情查看-->
+					<a><img src="res/imgs/blog-1.jpg" alt="item"></a>
+					<div class="st1">
+						<div class="clearfix bottom">
+							<el-button type="primary" @click="isShowLike = true"><i class="el-icon-star-off"></i></el-button>
+							<el-dialog class="left" title="提示" v-model="isShowLike" size="tiny">
+								<span>确认添加到"最喜欢"</span>
+								<span slot="footer" class="dialog-footer">
+                                                        <el-button @click="isShowLike = false">取 消</el-button>
+                                                        <el-button type="primary" @click="isShowLike = false">确 定</el-button>
+                                                    </span>
+							</el-dialog>
+							<el-button type="primary" @click="isShowMarket = true"><a>二</a></el-button>
+							<el-dialog class="left" title="发布到二手市场" v-model="isShowMarket" size="tiny">
+								<!--这里需要增加一个判断值不为空的函数-->
+								<span>出售价格：￥<el-input class="sale" v-model="input" placeholder="请输入内容"></el-input></span>
+								<span slot="footer" class="dialog-footer">
+                                                        <el-button @click="isShowMarket = false">取 消</el-button>
+                                                        <el-button type="primary" @click="isShowMarket = false">确 定</el-button>
+                                                    </span>
+							</el-dialog>
+							<el-button type="primary" @click="isShowClean = true"><i class="el-icon-delete"></i></el-button>
+							<el-dialog class="left" title="提示" v-model="isShowClean" size="tiny">
+								<span>确认添加到""待清理</span>
+								<span slot="footer">
+                                                        <el-button @click="isShowClean = false">取 消</el-button>
+                                                        <el-button type="primary" @click="isShowClean = false">确 定</el-button>
+                                                    </span>
+							</el-dialog>
+						</div>
+					</div>
+				</el-card>
+			</el-col>
+		</el-row>
+	</div>
+
+</div>
+<script>
+	(function () {
+		new Vue({
+			el: "#cloth-all",
+			data: function () {
+				return {
+					conditions: {
+						purcherTime: "0",
+						season: "0",
+						occasion: "0",
+						material: "0",
+						color: "0",
+						isCleaning: false,
+						isSelling: false
+					},
+					options: {
+						purcherTime: [
+							{ label: "不限", value: "0" },
+							{ label: "三个月内", value: "1" },
+							{ label: "半年内", value: "2" },
+							{ label: "一年内", value: "3" },
+							{ label: "两年内", value: "4" },
+							{ label: "两年以上", value: "5" }
+						],
+						season: [
+							{ label: "不限", value: "0" },
+							{ label: "春秋", value: "1" },
+							{ label: "夏", value: "2" },
+							{ label: "冬", value: "3" }
+						],
+						occasion: [
+							{ label: "不限", value: "0" },
+							{ label: "工作", value: "1" },
+							{ label: "休闲", value: "2" },
+							{ label: "运动", value: "3" },
+							{ label: "宴会", value: "4" },
+							{ label: "其他", value: "5" }
+						],
+						material: [
+							{ label: "不限", value: "0" },
+							{ label: "羊毛", value: "1" },
+							{ label: "丝绸", value: "2" },
+							{ label: "羽绒", value: "3" },
+							{ label: "棉麻", value: "4" },
+							{ label: "其他", value: "5" }
+						],
+						color: [
+							{ label: "不限", value: "0" },
+							{ label: "浅色", value: "1" },
+							{ label: "深色", value: "2" },
+							{ label: "亮色", value: "3" }
+						]
+					}
+				};
+			},
+			methods: {
+				//“查询”按钮
+				queryClothByConditions() {
+					console.log('queryClothByConditions!');
+				}
+			}
+		});
+	})();
+</script>

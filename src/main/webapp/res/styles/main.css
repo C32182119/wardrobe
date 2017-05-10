@@ -22,7 +22,7 @@ h {
     /*-webkit-margin-start: 0px;*/
     /*-webkit-margin-end: 0px;*/
 }
-a{
+a {
     text-decoration:none;
 }
 p {
@@ -40,10 +40,10 @@ p {
     position: relative;
     margin: 0 auto;
 }
-.right{
+.right {
     text-align: right;
 }
-.left{
+.left {
     text-align: left;
 }
 
@@ -60,11 +60,11 @@ p {
 }
 
 
-.bg-base{
+.bg-base {
     background: #e4ddc6;
     padding-left: 8px;
 }
-.bg-white{
+.bg-white {
     background: transparent;
 }
 
@@ -97,12 +97,12 @@ p {
 .el-menu {
     background-color: transparent;
 }
-.el-menu-item a{
+.el-menu-item a {
     text-decoration:none;
     font-size: 15px;
     font-weight: bold;
 }
-.el-menu--horizontal .el-menu-item:hover{
+.el-menu--horizontal .el-menu-item:hover {
     background-color: rgba(182, 121, 95, 0.1);
     border-bottom: 5px solid #b6795f;
 }
@@ -121,7 +121,7 @@ p {
 .el-breadcrumb__item:last-child .el-breadcrumb__item__inner,
 .el-breadcrumb__item:last-child .el-breadcrumb__item__inner:hover,
 .el-icon-close:hover:before,
-.el-icon-plus:hover:before{
+.el-icon-plus:hover:before {
     color:#b6795f;
 }
 
@@ -129,11 +129,11 @@ p {
 .el-breadcrumb__item__inner:hover,
 .el-breadcrumb__item__inner,
 .el-breadcrumb__item__inner a,
-.el-breadcrumb__separator{
+.el-breadcrumb__separator {
     color: black;
 }
 .el-breadcrumb__item__inner:hover,
-.el-breadcrumb__item__inner{
+.el-breadcrumb__item__inner {
     font-weight: bold;
 }
 
@@ -142,17 +142,17 @@ p {
 /*分隔线*/
 .deliver-line,
 .login,
-.register{
+.register {
     float: left;
     display: inline;
     padding: 20px 0;
     font-size: 14px;
     color: #b6795f;
 }
-.point{
+.point {
     cursor: pointer;
 }
-.login_form{
+.login-form {
     width: 300px;
     margin: 0 auto;
 }
@@ -167,14 +167,14 @@ p {
 /** *middle部分样式*/
 /** */
 /*board*/
-.board_pic{
+.board_pic {
     height: 500px;
     width: 90%;
     background-image: url(../imgs/grey_bg.jpg);
     text-align: center;
     background-size: 100%;
 }
-#board_charactors{
+#board_charactors {
     position: absolute;
     height: 70%;
     width: 81%;
@@ -189,14 +189,14 @@ p {
     font-size: medium;
     margin: 0 0 0 0;
 }
-.board_bt{
+.board_bt {
     margin-top:30px;
 }
 /*title*/
-.title{
+.title {
     padding-top: 55px;
 }
-.title p{
+.title p {
     color: #777;
     font-size: 13px;
     letter-spacing: 0.52px;
@@ -205,7 +205,7 @@ p {
     position: relative;
     text-transform: uppercase;
 }
-.title h{
+.title h {
     color: #333;
     font-family: 'montserratlight';
     font-size: 32px;
@@ -217,23 +217,22 @@ p {
 }
 
 
-
-
 /*筛选条件样式*/
 .el-form-item__content {
-    width: 102px;
+    width: 100px;
 }
-.text2.el-form-item__content
-{
+.cloth-all-group {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: top;
+}
+.cloth-all-group .el-form-item__content {
+    width: 150px;
+}
+.text2.el-form-item__content {
     width: 416px;
 }
-.foot{
-    padding-left: 350px;
 
-}
-.foot.el-form-item__content{
-    width: 135px;
-}
 
 #aaaaa {
     width: 200px;
@@ -322,7 +321,7 @@ p {
 }
 
 .el-textarea{
-    width: 416px;
+    width: 414px;
 }
 .el-input__icon+.el-input__inner{
     padding-right: 0;
@@ -346,26 +345,6 @@ p {
     color:  #be8770;
 }
 
-
-/*添加照片*/
-.avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-    border-color: #20a0ff;
-}
-.avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-}
 .avatar {
     /*width: 178px;*/
     /*height: 178px;*/
@@ -374,21 +353,35 @@ p {
     display: block;
     margin: auto;
 }
-.el-upload-dragger{
-    width: 317px;
-    height: 317px;
+/*添加照片*/
+.avatar-uploader .el-upload {
+    position: relative;
+    width: 315px;
+    height:315px;
+    background-color: rgba(190, 136, 113, 0.18);
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    overflow: hidden;
 }
-.avatar-uploader .el-upload{
-    width: 317px;
-    height:317px;
-    background-color: rgba(190, 136, 113, 0.18) ;
+.avatar-uploader .el-upload:hover {
+    border-color: #20a0ff;
 }
 .avatar-uploader-icon {
     width: 315px;
     height: 315px;
     line-height: 315px;
-    background-color: rgba(190, 136, 113, 0.18) ;
+    text-align: center;
+    font-size: 28px;
+    color: #8c939d;
+    background-color: rgba(190, 136, 113, 0.18);
 }
+
+.el-upload-dragger {
+    width: 317px;
+    height: 317px;
+}
+
 /*表单*/
 .tab_form{
     padding-top:30px;
@@ -403,3 +396,36 @@ p {
 
 /*4.27新增*/
 /*筛选条*/
+
+
+
+
+
+#cloth-all .el-form-item__content {
+    width: 100px;
+}
+#cloth-all .cloth-all-group {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: top;
+}
+#cloth-all .cloth-all-group .el-form-item__content {
+    width: 150px;
+}
+#cloth-all .cloth-add-icon {
+    text-align: left;
+    height: 40px;
+}
+
+#cloth-add .el-date-editor.el-input {
+    width: 100px;
+}
+#cloth-add .cloth-add-textarea {
+    text-align: left;
+}
+#cloth-add .cloth-add-textarea .el-form-item__content {
+    width: auto;
+}
+#cloth-add .foot {
+    margin-right: 10px;
+}

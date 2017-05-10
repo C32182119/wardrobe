@@ -23,11 +23,6 @@ public class UserController extends BaseController {
     @Autowired
     private InformationService informationService;
 
-    @RequestMapping("/home-page")
-    public String homePage() {
-        return "home_page";
-    }
-
     @RequestMapping("/send-out")
     public @ResponseBody
     boolean sendOut(@PathVariable("userId") String userId,

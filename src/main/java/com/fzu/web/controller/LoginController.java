@@ -35,19 +35,17 @@ public class LoginController extends BaseController {
 
     @RequestMapping("/sign-up")
     public @ResponseBody
-    boolean signUp(@RequestBody User u) {
-        boolean isSuccess = false;
+    String signUp(@RequestBody User u) {
+        String userId = "false";
         String username = u.getUsername();
         User user = userService.queryUserByUsername(username);
         if (user == null) {
             u.setUserId(Util.getNewIdByType("u"));
             u.setCreateTime((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS")).format(new Date()));
             userService.saveUser(u);
-
-            isSuccess = true;
+            userId = u.getUserId();
         }
-
-        return isSuccess;
+        return userId;
     }
 
 }

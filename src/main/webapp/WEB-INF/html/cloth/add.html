@@ -1,0 +1,207 @@
+<div id="cloth-add">
+<el-row>
+	<!--上传图片-->
+	<el-col :span="7" :offset="2">
+		<el-upload
+				class="avatar-uploader"
+				action="https://jsonplaceholder.typicode.com/posts/"
+				:show-file-list="false"
+				:on-success="handleAvatarSuccess"
+				:before-upload="beforeAvatarUpload">
+			<img v-if="imageUrl" :src="imageUrl" class="avatar">
+			<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+		</el-upload>
+	</el-col>
+	<!--填写表单-->
+	<el-col :span="13" :offset="2">
+		<div style="width: 492px;text-align:right">
+		<el-form class="tab_form" :inline="true" :model="conditions">
+			<el-form-item label="购入时间">
+				<el-date-picker
+						:editable="false"
+						type="month"
+						placeholder="选择月"
+						v-model="conditions.month">
+				</el-date-picker>
+			</el-form-item>
+			<el-form-item label="季节">
+				<el-select v-model="conditions.season" placeholder="季节">
+					<el-option
+							v-for="item in options.season"
+							:key="item.value"
+							:label="item.label"
+							:value="item.value">
+					</el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item label="场合">
+				<el-select v-model="conditions.occasion" placeholder="场合">
+					<el-option
+							v-for="item in options.occasion"
+							:key="item.value"
+							:label="item.label"
+							:value="item.value">
+					</el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item label="材质">
+				<el-select v-model="conditions.material" placeholder="材质">
+					<el-option
+							v-for="item in options.material"
+							:key="item.value"
+							:label="item.label"
+							:value="item.value">
+					</el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item label="色系">
+				<el-select v-model="conditions.color" placeholder="色系">
+					<el-option
+							v-for="item in options.color"
+							:key="item.value"
+							:label="item.label"
+							:value="item.value">
+					</el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item label="尺码">
+				<el-select v-model="conditions.size" placeholder="尺码">
+					<el-option
+							v-for="item in options.size"
+							:key="item.value"
+							:label="item.label"
+							:value="item.value">
+					</el-option>
+				</el-select>
+			</el-form-item>
+			<div class="cloth-add-textarea">
+				<el-form-item label="其他说明">
+					<el-input type="textarea" v-model="conditions.desc" placeholder="其他说明"></el-input>
+				</el-form-item>
+			</div>
+			<div class="foot">
+				<el-button type="primary" @click="addCloth">添加</el-button>
+				<el-button @click="cancelAddCloth">取消</el-button>
+			</div>
+		</el-form>
+		</div>
+	</el-col>
+</el-row>
+</div>
+<script>
+	(function () {
+		var v = new Vue({
+			el: "#cloth-add",
+			data: function () {
+				return {
+					conditions: {
+						month: "0",
+						season: "0",
+						occasion: "0",
+						material: "0",
+						color: "0",
+						size: "0",
+						desc: ""
+					},
+					options: {
+						season: [
+							{ label: "不限", value: "0" },
+							{ label: "春秋", value: "1" },
+							{ label: "夏", value: "2" },
+							{ label: "冬", value: "3" }
+						],
+						occasion: [
+							{ label: "不限", value: "0" },
+							{ label: "工作", value: "1" },
+							{ label: "休闲", value: "2" },
+							{ label: "运动", value: "3" },
+							{ label: "宴会", value: "4" },
+							{ label: "其他", value: "5" }
+						],
+						material: [
+							{ label: "不限", value: "0" },
+							{ label: "羊毛", value: "1" },
+							{ label: "丝绸", value: "2" },
+							{ label: "羽绒", value: "3" },
+							{ label: "棉麻", value: "4" },
+							{ label: "其他", value: "5" }
+						],
+						color: [
+							{ label: "不限", value: "0" },
+							{ label: "浅色", value: "1" },
+							{ label: "深色", value: "2" },
+							{ label: "亮色", value: "3" }
+						],
+						size: [
+							{ label: "不限", value: "0" },
+							{ label: "XS", value: "1" },
+							{ label: "S", value: "2" },
+							{ label: "M", value: "3" },
+							{ label: "L", value: "4" },
+							{ label: "XL", value: "5" }
+						]
+					},
+					imageUrl: ""
+				};
+			},
+			methods: {
+				//添加新衣图片
+				handleAvatarSuccess(res, file) {
+					this.imageUrl = URL.createObjectURL(file.raw);
+				},
+				beforeAvatarUpload(file) {
+					const isJPG = file.type === 'image/jpeg';
+					const isLt2M = file.size / 1024 / 1024 < 2;
+					if (!isJPG) {
+						this.$message.error('上传头像图片只能是 JPG 格式!');
+					}
+					if (!isLt2M) {
+						this.$message.error('上传头像图片大小不能超过 2MB!');
+					}
+					return isJPG && isLt2M;
+				},
+				//“添加”按钮
+				addCloth() {
+					var cloth = {};
+//					cloth.userId;
+//					cloth.clothName;
+//					cloth.clothPrice;
+					cloth.createTime = this.conditions.month;
+					cloth.material = this.conditions.material;
+					cloth.occasion = this.conditions.occasion;
+					cloth.season = this.conditions.season;
+					cloth.color = this.conditions.color;
+					cloth.size = this.conditions.size;
+					cloth.clothImg = this.imageUrl;
+					cloth.isCleaned = 0;
+					cloth.isForSale = 0;
+					cloth.isSelled = 0;
+					cloth.others = this.desc;
+					$.ajax({
+						url: CLASS_PATH + "cloth/add-cloth",
+						type: "POST",
+						dataType: "json",
+						contentType: "application/json",
+						data: JSON.stringify(cloth),
+						success: function (data) {
+							console.log(data);
+							if (data === true) {
+								alert("send out success !");
+							}
+							else {
+								alert("success !");
+							}
+						},
+						error: function () {
+							alert("error !");
+						}
+					});
+
+				},
+				cancelAddCloth() {
+					mainJS.ajax.requestPartialHtml(`cloth-all`, `cloth-content`)
+				}
+			}
+		});
+	})();
+</script>

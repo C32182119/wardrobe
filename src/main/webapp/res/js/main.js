@@ -1,15 +1,19 @@
+var CLASS_PATH = "http://localhost:8080/wardrobe/";
+var loadingInstance;
 //主js模块
 var mainJS = (function (){
     "use strict";
-    var local = {}, event = {}, ui = {}, ajax = {},
+    var local = {}, vue = {}, data = {}, event = {}, ui = {}, ajax = {},
         module = {
+            vue: vue,
+            data: data,
             event: event,
             ui: ui,
 	        ajax: ajax
         };
     //local
     {
-        local.CLASS_PATH = "http://localhost:8080/wardrobe/";
+
     }
     //event
     {
@@ -21,50 +25,79 @@ var mainJS = (function (){
     }
     //ajax
     {
-	    ajax.requestHtml = function (htmlName) {
+	    ajax.requestHtml = function (htmlName, parentDomId) {
+		    loadingInstance = Vue.prototype.$loading({ target: "#" + parentDomId, text:"加载中..." });
 		    $.ajax({
-			    url: local.CLASS_PATH + htmlName,
+			    url: CLASS_PATH + htmlName + ".html",
 			    type: "GET",
 			    dataType: "html",
 			    success: function (data) {
-				    $("#main").html(data);
-				    initVue();
+				    loadingInstance.close();
+				    $("#" + parentDomId).html(data);
 			    },
 			    error: function () {
+				    loadingInstance.close();
 				    alert("error !");
 			    }
 		    });
 	    };
 
+        ajax.requestPartialHtml = function (htmlName, parentDomId) {
+	        loadingInstance = Vue.prototype.$loading({ target: "#" + parentDomId, text:"加载中..." });
+            var str = htmlName.split("-");
+	        $.ajax({
+		        url: CLASS_PATH + str[0] + "/" + str[1],
+		        type: "GET",
+		        dataType: "html",
+		        success: function (data) {
+			        loadingInstance.close();
+			        $("#" + parentDomId).html(data);
+		        },
+		        error: function () {
+			        loadingInstance.close();
+			        alert("error !");
+		        }
+	        });
+        };
+
         //登录页
-	    ajax.signIn = function () {
-            var user = {};
-            user.username = $("#username").val();
-            user.password = $("#password").val();
+	    ajax.signIn = function (user) {
+	        var result;
             $.ajax({
-                url: local.CLASS_PATH + "sign-in",
+                url: CLASS_PATH + "sign-in",
                 type: "POST",
+	            async: false,
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(user),
                 success: function (data) {
-                    console.log(data);
-                    if (data === true) {
-                        alert("sign in success !");
-                    }
-                    else if (data === false) {
-                        alert("sign in fail !");
-                    }
-                    else {
-                        alert("success !");
-                    }
+	                result = data;
                 },
                 error: function () {
                     alert("error !");
                 }
             });
-
+            return result;
         };
+
+	    ajax.signUp = function (user) {
+		    var result;
+		    $.ajax({
+			    url: CLASS_PATH + "sign-up",
+			    type: "POST",
+			    async: false,
+			    dataType: "json",
+			    contentType: "application/json",
+			    data: JSON.stringify(user),
+			    success: function (data) {
+				    result = data;
+			    },
+			    error: function () {
+				    alert("error !");
+			    }
+		    });
+		    return result;
+	    };
 
         //用户页
         //发布信息，根据父元素的type确定信息的类型
@@ -74,7 +107,7 @@ var mainJS = (function (){
             information.content = $("#send_content", $(e.targetElement.parentNode)).val();
 
             $.ajax({
-                url: local.CLASS_PATH + "send-out",
+                url: CLASS_PATH + "send-out",
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json",
@@ -104,7 +137,7 @@ var mainJS = (function (){
 
 var initVue = function () {
 	new Vue({
-		el: "#app_1",
+		el: "#app",
 		data: function () {
 			//"登录"验证函数
 			var checkName = (rule, value, callback) => {
@@ -234,10 +267,6 @@ var initVue = function () {
 		},
 
 		methods: {
-			//nav-menu
-			handleSelect(key, keyPath) {
-				console.log(key, keyPath);
-			},
 			//登录注册对话框
 			submitForm(formName) {
 				this.$refs[formName].validate((valid) => {
@@ -255,11 +284,11 @@ var initVue = function () {
 			//page_2选项卡
 			handleClickManage(tab, event) {
 				console.log(tab, event);
+
+				mainJS.ajax.requestPartialHtml("cloth-all", "cloth-content");
+
 			},
-			//“查询”按钮
-			screenQuery() {
-				console.log('submit!');
-			},
+
 			//“确定”按钮
 			onSubmit2() {
 				console.log('submit2!');
@@ -287,7 +316,7 @@ var initVue = function () {
 					this.$message.error('上传头像图片大小不能超过 2MB!');
 				}
 				return isJPG && isLt2M;
-			},
+			}
 
 		}
 	});

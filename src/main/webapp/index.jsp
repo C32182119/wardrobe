@@ -37,6 +37,7 @@
                 <!-- nav-menu /- -->
                 <!-- nav-user -->
                 <el-col :span="2">
+    <div>
                     <div class="login point"><a @click="signIn = true">登录</a></div>
                     <el-dialog title="登录" v-model="signIn" size="tiny">
                         <el-form :model="signInForm" :rules="signInRule" ref="signInForm" label-width="100px">
@@ -75,6 +76,9 @@
                             </div>
                         </el-form>
                     </el-dialog>
+    </div>
+    <div class="setting point"><a>用户名</a></div>
+
                 </el-col>
                 <!-- nav-user /- -->
             </el-row>

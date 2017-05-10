@@ -15,6 +15,10 @@ var mainJS = (function (){
     {
 
     }
+    //data
+    {
+        data.user = undefined;
+    }
     //event
     {
 
@@ -37,7 +41,7 @@ var mainJS = (function (){
 			    },
 			    error: function () {
 				    loadingInstance.close();
-				    alert("error !");
+				    alert("网络连接异常");
 			    }
 		    });
 	    };
@@ -55,7 +59,7 @@ var mainJS = (function (){
 		        },
 		        error: function () {
 			        loadingInstance.close();
-			        alert("error !");
+			        alert("网络连接异常");
 		        }
 	        });
         };
@@ -71,10 +75,16 @@ var mainJS = (function (){
                 contentType: "application/json",
                 data: JSON.stringify(user),
                 success: function (data) {
-	                result = data;
+                    if (data !== null) {
+	                    mainJS.data.user = data;
+                        result = true;
+                    }
+                    else {
+	                    result = false;
+                    }
                 },
                 error: function () {
-                    alert("error !");
+                    alert("网络连接异常");
                 }
             });
             return result;
@@ -90,10 +100,15 @@ var mainJS = (function (){
 			    contentType: "application/json",
 			    data: JSON.stringify(user),
 			    success: function (data) {
-				    result = data;
+				    if (data !== null) {
+					    result = true;
+				    }
+				    else {
+					    result = false;
+				    }
 			    },
 			    error: function () {
-				    alert("error !");
+				    alert("网络连接异常");
 			    }
 		    });
 		    return result;

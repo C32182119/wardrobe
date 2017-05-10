@@ -20,32 +20,28 @@ public class LoginController extends BaseController {
 
     @RequestMapping("/sign-in")
     public @ResponseBody
-    boolean signIn(@RequestBody User u) {
-        boolean isSuccess = false;
+    User signIn(@RequestBody User u) {
         String username = u.getUsername();
         String password = u.getPassword();
-
         User user = userService.queryUserByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
-            isSuccess = true;
+            return user;
         }
-
-        return isSuccess;
+        return null;
     }
 
     @RequestMapping("/sign-up")
     public @ResponseBody
-    String signUp(@RequestBody User u) {
-        String userId = "false";
+    User signUp(@RequestBody User u) {
         String username = u.getUsername();
         User user = userService.queryUserByUsername(username);
         if (user == null) {
             u.setUserId(Util.getNewIdByType("u"));
             u.setCreateTime((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS")).format(new Date()));
             userService.saveUser(u);
-            userId = u.getUserId();
+            return u;
         }
-        return userId;
+        return null;
     }
 
 }

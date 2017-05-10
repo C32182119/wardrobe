@@ -173,7 +173,7 @@
                     user.password = this[formName].password;
                     if (formName === "signInForm") {
                         result = mainJS.ajax.signIn(user);
-                        if (result !== "" && result !== "false") {
+                        if (result === true) {
                             alert("登录成功");
                             this.signIn = false;
                         }

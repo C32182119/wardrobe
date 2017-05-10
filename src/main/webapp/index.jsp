@@ -37,48 +37,47 @@
                 <!-- nav-menu /- -->
                 <!-- nav-user -->
                 <el-col :span="2">
-    <div>
-                    <div class="login point"><a @click="signIn = true">登录</a></div>
-                    <el-dialog title="登录" v-model="signIn" size="tiny">
-                        <el-form :model="signInForm" :rules="signInRule" ref="signInForm" label-width="100px">
-                            <!-- 需要修改验证 -->
-                            <div class="login-form">
-                                <el-form-item label="用户名" prop="username">
-                                    <el-input v-model="signInForm.username"></el-input>
-                                </el-form-item>
-                                <el-form-item label="密码" prop="password">
-                                    <el-input type="password" v-model="signInForm.password" auto-complete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item class="center">
-                                    <el-button type="primary" @click="submitForm('signInForm')">登录</el-button>
-                                </el-form-item>
-                            </div>
-                        </el-form>
-                    </el-dialog>
-                    <div class="deliver-line">&nbsp; | &nbsp;</div>
-                    <div class="register point"><a @click="signUp = true">注册</a></div>
-                    <el-dialog title="注册" v-model="signUp" size="tiny">
-                        <el-form :model="signUpForm" :rules="signUpRule" ref="signUpForm" label-width="100px">
-                            <!-- 需要修改验证 -->
-                            <div class="login-form">
-                                <el-form-item label="用户名" prop="username">
-                                    <el-input v-model.number="signUpForm.username"></el-input>
-                                </el-form-item>
-                                <el-form-item label="密码" prop="password">
-                                    <el-input type="password" v-model="signUpForm.password" auto-complete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item label="确认密码" prop="checkPassword">
-                                    <el-input type="password" v-model="signUpForm.checkPassword" auto-complete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item class="center">
-                                    <el-button type="primary" @click="submitForm('signUpForm')">注册</el-button>
-                                </el-form-item>
-                            </div>
-                        </el-form>
-                    </el-dialog>
-    </div>
-    <div class="setting point"><a>用户名</a></div>
-
+                    <div v-if="user !== undefined" class="setting point"><a href="#">{{ user.username }}</a></div>
+                    <div v-else>
+                        <div class="login point"><a @click="signIn = true">登录</a></div>
+                        <el-dialog title="登录" v-model="signIn" size="tiny">
+                            <el-form :model="signInForm" :rules="signInRule" ref="signInForm" label-width="100px">
+                                <!-- 需要修改验证 -->
+                                <div class="login-form">
+                                    <el-form-item label="用户名" prop="username">
+                                        <el-input v-model="signInForm.username" key="signInForm.username"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="密码" prop="password">
+                                        <el-input type="password" v-model="signInForm.password" key="signInForm.password" auto-complete="off"></el-input>
+                                    </el-form-item>
+                                    <el-form-item class="center">
+                                        <el-button type="primary" @click="submitForm('signInForm')">登录</el-button>
+                                    </el-form-item>
+                                </div>
+                            </el-form>
+                        </el-dialog>
+                        <div class="deliver-line">&nbsp; | &nbsp;</div>
+                        <div class="register point"><a @click="signUp = true">注册</a></div>
+                        <el-dialog title="注册" v-model="signUp" size="tiny">
+                            <el-form :model="signUpForm" :rules="signUpRule" ref="signUpForm" label-width="100px">
+                                <!-- 需要修改验证 -->
+                                <div class="login-form">
+                                    <el-form-item label="用户名" prop="username">
+                                        <el-input v-model.number="signUpForm.username" key="signUpForm.username"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="密码" prop="password">
+                                        <el-input type="password" v-model="signUpForm.password" key="signUpForm.password" auto-complete="off"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="确认密码" prop="checkPassword">
+                                        <el-input type="password" v-model="signUpForm.checkPassword" key="signUpForm.checkPassword" auto-complete="off"></el-input>
+                                    </el-form-item>
+                                    <el-form-item class="center">
+                                        <el-button type="primary" @click="submitForm('signUpForm')">注册</el-button>
+                                    </el-form-item>
+                                </div>
+                            </el-form>
+                        </el-dialog>
+                    </div>
                 </el-col>
                 <!-- nav-user /- -->
             </el-row>
@@ -134,7 +133,7 @@
                     }
                 };
                 return {
-                    user: mainJS.data.user,
+                    user: undefined,
                     signIn: false,
                     signUp: false,
                     //登录
@@ -180,6 +179,7 @@
                         result = mainJS.ajax.signIn(user);
                         if (result === true) {
                             alert("登录成功");
+                            this.user = mainJS.data.user;
                             this.signIn = false;
                         }
                         else if (result === false) {

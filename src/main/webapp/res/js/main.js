@@ -13,7 +13,7 @@ var mainJS = (function (){
         };
     //local
     {
-
+        local.CLASS_PATH = "http://localhost:8080/wardrobe/";
     }
     //data
     {
@@ -30,6 +30,9 @@ var mainJS = (function (){
     //ajax
     {
 	    ajax.requestHtml = function (htmlName, parentDomId) {
+	        if (htmlName !== "index" && mainJS.data.user === undefined) {
+		        return ajax.requestHtml("index", parentDomId);
+            }
 		    loadingInstance = Vue.prototype.$loading({ target: "#" + parentDomId, text:"加载中..." });
 		    $.ajax({
 			    url: CLASS_PATH + htmlName + ".html",
@@ -77,6 +80,7 @@ var mainJS = (function (){
                 success: function (data) {
                     if (data !== null) {
 	                    mainJS.data.user = data;
+	                    CLASS_PATH = local.CLASS_PATH + data.userId + "/";
                         result = true;
                     }
                     else {
@@ -84,11 +88,17 @@ var mainJS = (function (){
                     }
                 },
                 error: function () {
+	                result = undefined;
                     alert("网络连接异常");
                 }
             });
             return result;
         };
+
+	    ajax.signOut = function () {
+		    CLASS_PATH = local.CLASS_PATH;
+		    mainJS.data.user = undefined;
+	    };
 
 	    ajax.signUp = function (user) {
 		    var result;
@@ -108,6 +118,7 @@ var mainJS = (function (){
 				    }
 			    },
 			    error: function () {
+				    result = undefined;
 				    alert("网络连接异常");
 			    }
 		    });

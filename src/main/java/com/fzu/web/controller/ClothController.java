@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/cloth")
+@RequestMapping("/{userId}/cloth")
 public class ClothController extends BaseController {
 
 

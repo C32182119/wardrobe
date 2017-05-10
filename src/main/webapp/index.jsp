@@ -130,6 +130,7 @@
                     }
                 };
                 return {
+                    user: mainJS.data.user,
                     signIn: false,
                     signUp: false,
                     //登录
@@ -177,7 +178,7 @@
                             alert("登录成功");
                             this.signIn = false;
                         }
-                        else {
+                        else if (result === false) {
                             alert("密码错误");
                         }
                     }
@@ -187,7 +188,7 @@
                             alert("注册成功");
                             this.signUp = false;
                         }
-                        else {
+                        else if (result === false) {
                             alert("用户名已存在");
                         }
                     }

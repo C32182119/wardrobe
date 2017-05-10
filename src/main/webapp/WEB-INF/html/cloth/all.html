@@ -1,72 +1,70 @@
 <div id="cloth-all">
 	<!--筛选条件-->
 	<el-form :inline="true" :model="conditions">
-				<el-form-item label="购入时间">
-					<el-select v-model="conditions.purcherTime" placeholder="购入时间">
-						<el-option
-								v-for="item in options.purcherTime"
-								:key="item.value"
-								:label="item.label"
-								:value="item.value">
-						</el-option>
-					</el-select>
-				</el-form-item>
-				<el-form-item label="季节">
-					<el-select v-model="conditions.season" placeholder="季节">
-						<el-option
-								v-for="item in options.season"
-								:key="item.value"
-								:label="item.label"
-								:value="item.value">
-						</el-option>
-					</el-select>
-				</el-form-item>
-				<el-form-item label="场合">
-					<el-select v-model="conditions.occasion" placeholder="场合">
-						<el-option
-								v-for="item in options.occasion"
-								:key="item.value"
-								:label="item.label"
-								:value="item.value">
-						</el-option>
-					</el-select>
-				</el-form-item>
-				<el-form-item label="材质">
-					<el-select v-model="conditions.material" placeholder="材质">
-						<el-option
-								v-for="item in options.material"
-								:key="item.value"
-								:label="item.label"
-								:value="item.value">
-						</el-option>
-					</el-select>
-				</el-form-item>
-				<el-form-item label="色系">
-					<el-select v-model="conditions.color" placeholder="色系">
-						<el-option
-								v-for="item in options.color"
-								:key="item.value"
-								:label="item.label"
-								:value="item.value">
-						</el-option>
-					</el-select>
-				</el-form-item>
-				<div class="cloth-all-group">
-					<el-form-item>
-						<!-- `checked` 为 true 或 false -->
-						<el-checkbox v-model="conditions.isCleaning">待清理</el-checkbox>
-						<!-- `checked` 为 true 或 false -->
-						<el-checkbox v-model="conditions.isSelling">待出售</el-checkbox>
-					</el-form-item>
-				</div>
-				<el-button type="primary" @click="queryClothByConditions">查询</el-button>
-			</el-form>
-
+		<el-form-item label="购入时间">
+			<el-select v-model="conditions.purcherTime" placeholder="购入时间">
+				<el-option
+						v-for="item in options.purcherTime"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+				</el-option>
+			</el-select>
+		</el-form-item>
+		<el-form-item label="季节">
+			<el-select v-model="conditions.season" placeholder="季节">
+				<el-option
+						v-for="item in options.season"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+				</el-option>
+			</el-select>
+		</el-form-item>
+		<el-form-item label="场合">
+			<el-select v-model="conditions.occasion" placeholder="场合">
+				<el-option
+						v-for="item in options.occasion"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+				</el-option>
+			</el-select>
+		</el-form-item>
+		<el-form-item label="材质">
+			<el-select v-model="conditions.material" placeholder="材质">
+				<el-option
+						v-for="item in options.material"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+				</el-option>
+			</el-select>
+		</el-form-item>
+		<el-form-item label="色系">
+			<el-select v-model="conditions.color" placeholder="色系">
+				<el-option
+						v-for="item in options.color"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+				</el-option>
+			</el-select>
+		</el-form-item>
+		<div class="cloth-all-group">
+			<el-form-item>
+				<!-- `checked` 为 true 或 false -->
+				<el-checkbox v-model="conditions.isCleaning">待清理</el-checkbox>
+				<!-- `checked` 为 true 或 false -->
+				<el-checkbox v-model="conditions.isSelling">待出售</el-checkbox>
+			</el-form-item>
+		</div>
+		<el-button type="primary" @click="queryClothByConditions">查询</el-button>
+	</el-form>
 	<!-- icon plus -->
 	<div class="cloth-add-icon">
 		<a href="javascript:mainJS.ajax.requestPartialHtml('cloth-add', 'cloth-all-content')"><i class="el-icon-plus"></i></a>
 	</div>
-
 	<div id="cloth-menu">
 		<!--商品陈列-->
 		<el-row>
@@ -108,14 +106,19 @@
 			</el-col>
 		</el-row>
 	</div>
-
 </div>
 <script>
 	(function () {
+		var clothes;
+		mainJS.ui.openLoading();
+		mainJS.ajax.requestData("cloth/get-all", undefined, false, function (data) {
+			console.log(data);
+		});
 		new Vue({
 			el: "#cloth-all",
 			data: function () {
 				return {
+					clothes: clothes,
 					conditions: {
 						purcherTime: "0",
 						season: "0",
@@ -172,5 +175,6 @@
 				}
 			}
 		});
+		mainJS.ui.closeLoading();
 	})();
 </script>

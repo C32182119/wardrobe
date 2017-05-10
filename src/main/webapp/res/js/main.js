@@ -78,7 +78,7 @@ var mainJS = (function (){
                 contentType: "application/json",
                 data: JSON.stringify(user),
                 success: function (data) {
-                    if (data !== null) {
+                    if (data !== null && data.userId !== null) {
 	                    mainJS.data.user = data;
 	                    CLASS_PATH = local.CLASS_PATH + data.userId + "/";
                         result = true;
@@ -110,7 +110,7 @@ var mainJS = (function (){
 			    contentType: "application/json",
 			    data: JSON.stringify(user),
 			    success: function (data) {
-				    if (data !== null) {
+				    if (data !== null && data.userId !== null) {
 					    result = true;
 				    }
 				    else {

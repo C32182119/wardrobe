@@ -27,7 +27,7 @@ public class LoginController extends BaseController {
         if (user != null && user.getPassword().equals(password)) {
             return user;
         }
-        return null;
+        return new User();
     }
 
     @RequestMapping("/sign-up")
@@ -41,7 +41,7 @@ public class LoginController extends BaseController {
             userService.saveUser(u);
             return u;
         }
-        return null;
+        return new User();
     }
 
 }

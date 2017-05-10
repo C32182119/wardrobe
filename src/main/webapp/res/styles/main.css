@@ -150,7 +150,8 @@ p {
     font-size: 14px;
     color: #b6795f;
 }
-.setting a{
+.setting a {
+    color: #b6795f;
     text-decoration: underline;
 }
 .point {

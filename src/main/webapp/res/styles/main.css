@@ -142,12 +142,16 @@ p {
 /*分隔线*/
 .deliver-line,
 .login,
+.setting,
 .register {
     float: left;
     display: inline;
     padding: 20px 0;
     font-size: 14px;
     color: #b6795f;
+}
+.setting a{
+    text-decoration: underline;
 }
 .point {
     cursor: pointer;

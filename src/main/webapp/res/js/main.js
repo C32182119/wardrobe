@@ -25,7 +25,13 @@ var mainJS = (function (){
     }
     //ui
     {
+	    ui.openLoading = function (domId) {
+		    loadingInstance = Vue.prototype.$loading({ target: "#" + domId, text:"加载中..." });
+	    };
 
+	    ui.closeLoading = function () {
+		    loadingInstance.close();
+	    };
     }
     //ajax
     {
@@ -33,7 +39,7 @@ var mainJS = (function (){
 	        if (htmlName !== "index" && mainJS.data.user === undefined) {
 		        return ajax.requestHtml("index", parentDomId);
             }
-		    loadingInstance = Vue.prototype.$loading({ target: "#" + parentDomId, text:"加载中..." });
+		    ui.openLoading(parentDomId);
 		    $.ajax({
 			    url: CLASS_PATH + htmlName + ".html",
 			    type: "GET",
@@ -65,6 +71,31 @@ var mainJS = (function (){
 			        alert("网络连接异常");
 		        }
 	        });
+        };
+
+        ajax.requestData = function (url, data, async, successCallback) {
+	        var result = false, options = {};
+	        async = async || false;
+	        options.url = CLASS_PATH + url;
+	        options.type = "POST";
+	        options.async = async;
+	        options.dataType = "json";
+	        options.contentType = "application/json";
+	        if (data !== undefined) {
+		        options.data = JSON.stringify(data);
+	        }
+	        options.success = function (data) {
+		        if (data !== null) {
+			        result = true;
+			        successCallback(data);
+		        }
+	        };
+	        options.error = function () {
+		        result = undefined;
+		        alert("网络连接异常");
+	        };
+	        $.ajax(options);
+	        return result;
         };
 
         //登录页

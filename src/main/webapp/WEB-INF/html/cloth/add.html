@@ -16,6 +16,14 @@
 	<el-col :span="13" :offset="2">
 		<div style="width: 492px;text-align:right">
 		<el-form class="tab_form" :inline="true" :model="conditions">
+			<div>
+				<el-form-item label="商品名称">
+					<el-input v-model="conditions.clothName" placeholder="商品名称"></el-input>
+				</el-form-item>
+				<el-form-item label="商品价格">
+					<el-input v-model="conditions.clothPrice" placeholder="商品价格"></el-input>
+				</el-form-item>
+			</div>
 			<el-form-item label="购入时间">
 				<el-date-picker
 						:editable="false"
@@ -95,6 +103,8 @@
 			data: function () {
 				return {
 					conditions: {
+						clothName: "",
+						clothPrice: "",
 						month: "0",
 						season: "0",
 						occasion: "0",
@@ -163,9 +173,8 @@
 				//“添加”按钮
 				addCloth() {
 					var cloth = {};
-//					cloth.userId;
-//					cloth.clothName;
-//					cloth.clothPrice;
+					cloth.clothName = this.conditions.clothName;
+					cloth.clothPrice = this.conditions.clothPrice;
 					cloth.createTime = this.conditions.month;
 					cloth.material = this.conditions.material;
 					cloth.occasion = this.conditions.occasion;
@@ -177,29 +186,18 @@
 					cloth.isForSale = 0;
 					cloth.isSelled = 0;
 					cloth.others = this.desc;
-					$.ajax({
-						url: CLASS_PATH + "cloth/add-cloth",
-						type: "POST",
-						dataType: "json",
-						contentType: "application/json",
-						data: JSON.stringify(cloth),
-						success: function (data) {
-							console.log(data);
-							if (data === true) {
-								alert("send out success !");
-							}
-							else {
-								alert("success !");
-							}
-						},
-						error: function () {
-							alert("error !");
+					mainJS.ajax.requestOrSendData("cloth/add-cloth", cloth, false, function (data) {
+						if (data === true) {
+							alert("添加成功");
+							mainJS.ajax.requestPartialHtml("cloth-all", "cloth-all-content");
+						}
+						else {
+							alert("添加失败");
 						}
 					});
-
 				},
 				cancelAddCloth() {
-					mainJS.ajax.requestPartialHtml(`cloth-all`, `cloth-content`)
+					mainJS.ajax.requestPartialHtml("cloth-all", "cloth-content");
 				}
 			}
 		});

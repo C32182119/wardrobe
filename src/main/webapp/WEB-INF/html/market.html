@@ -1,125 +1,181 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Market</title>
-</head>
-<body>
+<div id="market">
     <!-- middle -->
     <div class="container">
-    <!-- 路径导航栏 -->
-    <el-row>
-        <el-col :span="24">
-            <div class="grid-content bg-base" >
-                <el-breadcrumb separator="/">
-                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>二手市场</el-breadcrumb-item>
-                </el-breadcrumb>
-            </div>
-        </el-col>
-    </el-row>
-    <!-- 路径导航栏 /- -->
+        <!-- 路径导航栏 -->
+        <el-row>
+            <el-col :span="24">
+                <div class="grid-content bg-base" >
+                    <el-breadcrumb separator="/">
+                        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                        <el-breadcrumb-item>二手市场</el-breadcrumb-item>
+                    </el-breadcrumb>
+                </div>
+            </el-col>
+        </el-row>
+        <!-- 路径导航栏 /- -->
 
-    <!-- title -->
-    <el-row>
-        <el-col :span="24" class="center title">
-            <p><h>二手市场</h></p>
-            <p>SECOND-HAND MARKET</p>
-            <img src="res/imgs/section-seprator.png"/>
-        </el-col>
-    </el-row>
-    <!-- title /- -->
+        <!-- title -->
+        <el-row>
+            <el-col :span="24" class="center title">
+                <p><h>二手市场</h></p>
+                <p>SECOND-HAND MARKET</p>
+                <img src="res/imgs/section-seprator.png"/>
+            </el-col>
+        </el-row>
+        <!-- title /- -->
 
-    <!-- section -->
-    <el-row>
-        <el-col :span="24">
-            <div class="grid-content bg-white">
-                <el-tabs v-model="activeName2" type="card" @tab-click="handleClick2">
-                    <el-tab-pane label="二手市场" name="first">
-                        <!-- 1 -->
-                        <div id="xxxx">
-                            <!--筛选条件-->
-                            <el-row>
-                                <el-col :span="18">
-                                    <div class="grid-content bg-white">
-                                        <el-form :inline="true" :model="Conditions" class="demo-conditions">
-                                            <el-form-item label="尺码">
-                                                <el-select v-model="Conditions.size" placeholder="尺码">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="XS" value="b"></el-option>
-                                                    <el-option label="S" value="c"></el-option>
-                                                    <el-option label="M" value="d"></el-option>
-                                                    <el-option label="L" value="e"></el-option>
-                                                    <el-option label="XL" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="季节">
-                                                <el-select v-model="Conditions.season" placeholder="季节">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="春秋" value="b"></el-option>
-                                                    <el-option label="夏" value="c"></el-option>
-                                                    <el-option label="冬" value="d"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="场合">
-                                                <el-select v-model="Conditions.occasion" placeholder="场合">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="工作" value="b"></el-option>
-                                                    <el-option label="休闲" value="c"></el-option>
-                                                    <el-option label="运动" value="d"></el-option>
-                                                    <el-option label="宴会" value="e"></el-option>
-                                                    <el-option label="其他" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="材质">
-                                                <el-select v-model="Conditions.material" placeholder="材质">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="羊毛" value="b"></el-option>
-                                                    <el-option label="丝绸" value="c"></el-option>
-                                                    <el-option label="羽绒" value="d"></el-option>
-                                                    <el-option label="棉麻" value="e"></el-option>
-                                                    <el-option label="其他" value="f"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            <el-form-item label="色系">
-                                                <el-select v-model="Conditions.color" placeholder="色系">
-                                                    <el-option label="不限" value="a"></el-option>
-                                                    <el-option label="浅色" value="b"></el-option>
-                                                    <el-option label="深色" value="c"></el-option>
-                                                    <el-option label="亮色" value="d"></el-option>
-                                                </el-select>
-                                            </el-form-item>
-                                            </el-form-item>
+        <!-- section -->
+        <el-row>
+            <el-col :span="24">
+                <div class="grid-content bg-white">
+                    <el-tabs type="card" value="first" @tab-click="toggleTab">
+                        <el-tab-pane label="二手市场" name="first">
+                            <!-- 1 -->
+                            <div id="xxxx">
+                                <!--筛选条件-->
+                                <el-row>
+                                    <el-col :span="18">
+                                        <div class="grid-content bg-white">
+                                            <el-form :inline="true" :model="conditions" class="demo-conditions">
+                                                <el-form-item label="尺码">
+                                                    <el-select v-model="conditions.size" placeholder="尺码">
+                                                        <el-option
+                                                                v-for="item in options.size"
+                                                                :key="item.value"
+                                                                :label="item.label"
+                                                                :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
+                                                </el-form-item>
+                                                <el-form-item label="季节">
+                                                    <el-select v-model="conditions.season" placeholder="季节">
+                                                        <el-option
+                                                                v-for="item in options.season"
+                                                                :key="item.value"
+                                                                :label="item.label"
+                                                                :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
+                                                </el-form-item>
+                                                <el-form-item label="场合">
+                                                    <el-select v-model="conditions.occasion" placeholder="场合">
+                                                        <el-option
+                                                                v-for="item in options.occasion"
+                                                                :key="item.value"
+                                                                :label="item.label"
+                                                                :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
+                                                </el-form-item>
+                                                <el-form-item label="材质">
+                                                    <el-select v-model="conditions.material" placeholder="材质">
+                                                        <el-option
+                                                                v-for="item in options.material"
+                                                                :key="item.value"
+                                                                :label="item.label"
+                                                                :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
+                                                </el-form-item>
+                                                <el-form-item label="色系">
+                                                    <el-select v-model="conditions.color" placeholder="色系">
+                                                        <el-option
+                                                                v-for="item in options.color"
+                                                                :key="item.value"
+                                                                :label="item.label"
+                                                                :value="item.value">
+                                                        </el-option>
+                                                    </el-select>
+                                                </el-form-item>
+                                                </el-form-item>
 
-                                        </el-form>
-                                    </div>
-                                </el-col>
+                                            </el-form>
+                                        </div>
+                                    </el-col>
 
-                                <el-col class="right" :span="2" :offset="4">
-                                    <el-button type="primary" @click="onSubmit">查询</el-button>
-                                </el-col>
-                            </el-row>
-                            <!--显示市场中状态为“待出售”的商品-->
-                            <el-row>
-                                <el-col :span="4" v-for="(o, index) in 5" :offset="index > 0 ? 1 : 0">
-                                    <el-card :body-style="{ padding: '0px' }">
-                                        <img src="res/imgs/blog-1.jpg" onClick="xxxx()">
-                                        <div class="st1">
-                                            <div class="bottom2 clearfix">
+                                    <el-col class="right" :span="2" :offset="4">
+                                        <el-button type="primary" @click="onSubmit">查询</el-button>
+                                    </el-col>
+                                </el-row>
+                                <!--显示市场中状态为“待出售”的商品-->
+                                <el-row>
+                                    <el-col :span="4" v-for="(o, index) in 5" :offset="index > 0 ? 1 : 0">
+                                        <el-card :body-style="{ padding: '0px' }">
+                                            <img src="res/imgs/blog-1.jpg" @click="xxxx">
+                                            <div class="st1">
+                                                <div class="bottom2 clearfix">
+                                                    <p><el-button type="text">卖家用户名</el-button></p>
+                                                    <p>出售价格：￥80.00</p>
+                                                    <s>原始价格：￥300.00</s>
+                                                </div>
+                                            </div>
+                                        </el-card>
+                                    </el-col>
+                                </el-row>
+                            </div>
+                            <!-- 1 /- -->
+                            <!-- 2 -->
+                            <div id="yyyy" >
+                                <!--点击1中商品图片 查看商品详情-->
+                                <el-card :body-style="{ padding: '20px 0 0 0' }">
+                                    <el-row>
+                                        <el-col :span="7" :offset="2">
+                                            <img src="res/imgs/blog-1.jpg">
+                                        </el-col>
+                                        <el-col :span="8" :offset="2">
+                                            <!-- 二手动态内容 -->
+                                            <div style="padding: 14px;">
+                                                <h>(二手商品信息)</h>
                                                 <p><el-button type="text">卖家用户名</el-button></p>
                                                 <p>出售价格：￥80.00</p>
-                                                <s>原始价格：￥300.00</s>
+                                                <p>原始价格：￥300.00</p>
+                                                <p>尺码：M </p>
+                                                <p>状态：待出售</p>
+                                                <p>发布时间：2017.03.01</p>
                                             </div>
-                                        </div>
-                                    </el-card>
+                                        </el-col>
+                                        <el-col :span="3" class="right">
+                                            <div style="margin:28px 0 0 0 ; padding: 2px 0 0 0;">
+                                                <el-button type="text" @click="yyyy">返回市场</el-button>
+                                            </div>
+                                            <div style="padding: 2px 0 0 0">
+                                                <el-button type="text">联系卖家</el-button>
+                                            </div>
+                                        </el-col>
+                                        <el-col :span="2"></el-col>
+                                    </el-row>
+                                    <el-row>
+                                        <el-col :span="12" :offset="11">
+                                            <el-card style="width: 95%;" :body-style="{ padding: '0px' }">
+                                                <a>留言联系卖家</a>
+                                                <p>留言</p>
+                                                <p>.</p>
+                                                <p>.</p>
+                                                <p>.</p>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="1"></el-col>
+                                    </el-row>
+                                </el-card>
+                            </div>
+                            <!-- 2 /- -->
+                        </el-tab-pane>
+
+                        <el-tab-pane label="我的商品" name="second">
+                            <!--筛选条件-->
+                            <el-row>
+                                <el-col :span="6" :offset="18">
+                                    <div class="right" label="状态" class="grid-content bg-white">
+                                        <el-checkbox v-model="checked3">待售出</el-checkbox>
+                                        <el-checkbox v-model="checked3">已成交</el-checkbox>
+                                        <el-checkbox v-model="checked3">取消发布</el-checkbox>
+                                    </div>
                                 </el-col>
                             </el-row>
-                        </div>
-                        <!-- 1 /- -->
-                        <!-- 2 -->
-                        <div id="yyyy" >
-                            <!--点击1中商品图片 查看商品详情-->
-                            <el-card :body-style="{ padding: '20px 0 0 0' }">
+                            <!--状态：待出售-->
+                            <el-card :body-style="{ padding: '0 ' }">
+                                <!-- n个动态 -->
+                                <!--1-->
                                 <el-row>
                                     <el-col :span="7" :offset="2">
                                         <img src="res/imgs/blog-1.jpg">
@@ -127,8 +183,7 @@
                                     <el-col :span="8" :offset="2">
                                         <!-- 二手动态内容 -->
                                         <div style="padding: 14px;">
-                                            <h>(二手商品信息)</h>
-                                            <p><el-button type="text">卖家用户名</el-button></p>
+                                            <h>二手商品信息</h>
                                             <p>出售价格：￥80.00</p>
                                             <p>原始价格：￥300.00</p>
                                             <p>尺码：M </p>
@@ -138,175 +193,200 @@
                                     </el-col>
                                     <el-col :span="3" class="right">
                                         <div style="margin:28px 0 0 0 ; padding: 2px 0 0 0;">
-                                            <el-button type="text" onClick="yyyy()">返回市场</el-button>
+                                            <el-button type="text">成功售出</el-button>
                                         </div>
                                         <div style="padding: 2px 0 0 0">
-                                            <el-button type="text">联系卖家</el-button>
+                                            <el-button type="text">取消发布</el-button>
+                                        </div>
+                                        <div style="padding: 2px 0 0 0">
+                                            <el-button type="text">查看评论</el-button>
                                         </div>
                                     </el-col>
                                     <el-col :span="2"></el-col>
                                 </el-row>
+                                <!--2-->
                                 <el-row>
                                     <el-col :span="12" :offset="11">
                                         <el-card style="width: 95%;" :body-style="{ padding: '0px' }">
-                                            <a>留言联系卖家</a>
-                                            <p>留言</p>
-                                            <p>.</p>
-                                            <p>.</p>
-                                            <p>.</p>
+                                            <a>评论</a>
+                                            <p>1</p>
+                                            <p>2</p>
+                                            <p>3</p>
                                         </el-card>
                                     </el-col>
                                     <el-col :span="1"></el-col>
                                 </el-row>
+
                             </el-card>
-                        </div>
-                        <!-- 2 /- -->
-                    </el-tab-pane>
+                            <!--状态：已成交-->
+                            <el-card :body-style="{ padding: '0 ' }">
+                                <!-- n个动态 -->
+                                <el-row>
+                                    <el-col :span="7" :offset="2">
+                                        <img src="res/imgs/blog-1.jpg">
+                                    </el-col>
+                                    <el-col :span="8" :offset="2">
+                                        <!-- 二手动态内容 -->
+                                        <div style="padding: 14px;">
+                                            <h>二手商品信息</h>
+                                            <p>出售价格：￥80.00</p>
+                                            <p>原始价格：￥300.00</p>
+                                            <p>尺码：M </p>
+                                            <p>状态：已成交</p>
+                                            <p>发布时间：2017.03.01</p>
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="3" class="right">
+                                        <div style="margin:28px 0 0 0 ; padding: 2px 0 0 0 0;">
+                                            <el-button type="text">删除记录</el-button>
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="2"></el-col>
+                                </el-row>
+                                <!--<el-row>-->
+                                <!--<el-col :span="14" :offset="10">-->
+                                <!--<el-card style="width: 95%;" :body-style="{ padding: '0px' }">-->
+                                <!--<a>评论</a>-->
+                                <!--<p>1</p>-->
+                                <!--<p>2</p>-->
+                                <!--<p>3</p>-->
+                                <!--</el-card>-->
+                                <!--</el-col>-->
+                                <!--</el-row>-->
 
-                    <el-tab-pane label="我的商品" name="second">
-                        <!--筛选条件-->
-                        <el-row>
-                            <el-col :span="6" :offset="18">
-                                <div class="right" label="状态" class="grid-content bg-white">
-                                    <el-checkbox v-model="checked3" checked="true">待售出</el-checkbox>
-                                    <el-checkbox v-model="checked3" checked="true">已成交</el-checkbox>
-                                    <el-checkbox v-model="checked3" checked="true">取消发布</el-checkbox>
-                                </div>
-                            </el-col>
-                        </el-row>
-                        <!--状态：待出售-->
-                        <el-card :body-style="{ padding: '0 ' }">
-                            <!-- n个动态 -->
-                            <!--1-->
-                            <el-row>
-                                <el-col :span="7" :offset="2">
-                                    <img src="res/imgs/blog-1.jpg">
-                                </el-col>
-                                <el-col :span="8" :offset="2">
-                                    <!-- 二手动态内容 -->
-                                    <div style="padding: 14px;">
-                                        <h>二手商品信息</h>
-                                        <p>出售价格：￥80.00</p>
-                                        <p>原始价格：￥300.00</p>
-                                        <p>尺码：M </p>
-                                        <p>状态：待出售</p>
-                                        <p>发布时间：2017.03.01</p>
-                                    </div>
-                                </el-col>
-                                <el-col :span="3" class="right">
-                                    <div style="margin:28px 0 0 0 ; padding: 2px 0 0 0;">
-                                        <el-button type="text">成功售出</el-button>
-                                    </div>
-                                    <div style="padding: 2px 0 0 0">
-                                        <el-button type="text">取消发布</el-button>
-                                    </div>
-                                    <div style="padding: 2px 0 0 0">
-                                        <el-button type="text">查看评论</el-button>
-                                    </div>
-                                </el-col>
-                                <el-col :span="2"></el-col>
-                            </el-row>
-                            <!--2-->
-                            <el-row>
-                                <el-col :span="12" :offset="11">
-                                    <el-card style="width: 95%;" :body-style="{ padding: '0px' }">
-                                        <a>评论</a>
-                                        <p>1</p>
-                                        <p>2</p>
-                                        <p>3</p>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="1"></el-col>
-                            </el-row>
+                            </el-card>
+                            <!--状态：取消发布-->
+                            <el-card :body-style="{ padding: '0 ' }">
+                                <!-- n个动态 -->
+                                <el-row>
+                                    <el-col :span="7" :offset="2">
+                                        <img src="res/imgs/blog-1.jpg">
+                                    </el-col>
+                                    <el-col :span="8" :offset="2">
+                                        <!-- 二手动态内容 -->
+                                        <div style="padding: 14px;">
+                                            <h>二手商品信息</h>
+                                            <p>出售价格：￥80.00</p>
+                                            <p>原始价格：￥300.00</p>
+                                            <p>尺码：M </p>
+                                            <p>状态：取消发布</p>
+                                            <p>发布时间：2017.03.01</p>
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="3" class="right">
+                                        <div style="margin:28px 0 0 0 ; padding: 2px 0 0 0;">
+                                            <el-button type="text">重新发布</el-button>
+                                        </div>
+                                    </el-col>
+                                    <el-col :span="2"></el-col>
+                                </el-row>
+                                <!--<el-row>-->
+                                <!--<el-col :span="14" :offset="10">-->
+                                <!--<el-card style="width: 95%;" :body-style="{ padding: '0px' }">-->
+                                <!--<a>评论</a>-->
+                                <!--<p>1</p>-->
+                                <!--<p>2</p>-->
+                                <!--<p>3</p>-->
+                                <!--</el-card>-->
+                                <!--</el-col>-->
+                                <!--</el-row>-->
 
-                        </el-card>
-                        <!--状态：已成交-->
-                        <el-card :body-style="{ padding: '0 ' }">
-                            <!-- n个动态 -->
-                            <el-row>
-                                <el-col :span="7" :offset="2">
-                                    <img src="res/imgs/blog-1.jpg">
-                                </el-col>
-                                <el-col :span="8" :offset="2">
-                                    <!-- 二手动态内容 -->
-                                    <div style="padding: 14px;">
-                                        <h>二手商品信息</h>
-                                        <p>出售价格：￥80.00</p>
-                                        <p>原始价格：￥300.00</p>
-                                        <p>尺码：M </p>
-                                        <p>状态：已成交</p>
-                                        <p>发布时间：2017.03.01</p>
-                                    </div>
-                                </el-col>
-                                <el-col :span="3" class="right">
-                                    <div style="margin:28px 0 0 0 ; padding: 2px 0 0 0 0;">
-                                        <el-button type="text">删除记录</el-button>
-                                    </div>
-                                </el-col>
-                                <el-col :span="2"></el-col>
-                            </el-row>
-                            <!--<el-row>-->
-                            <!--<el-col :span="14" :offset="10">-->
-                            <!--<el-card style="width: 95%;" :body-style="{ padding: '0px' }">-->
-                            <!--<a>评论</a>-->
-                            <!--<p>1</p>-->
-                            <!--<p>2</p>-->
-                            <!--<p>3</p>-->
-                            <!--</el-card>-->
-                            <!--</el-col>-->
-                            <!--</el-row>-->
+                            </el-card>
 
-                        </el-card>
-                        <!--状态：取消发布-->
-                        <el-card :body-style="{ padding: '0 ' }">
-                            <!-- n个动态 -->
-                            <el-row>
-                                <el-col :span="7" :offset="2">
-                                    <img src="res/imgs/blog-1.jpg">
-                                </el-col>
-                                <el-col :span="8" :offset="2">
-                                    <!-- 二手动态内容 -->
-                                    <div style="padding: 14px;">
-                                        <h>二手商品信息</h>
-                                        <p>出售价格：￥80.00</p>
-                                        <p>原始价格：￥300.00</p>
-                                        <p>尺码：M </p>
-                                        <p>状态：取消发布</p>
-                                        <p>发布时间：2017.03.01</p>
-                                    </div>
-                                </el-col>
-                                <el-col :span="3" class="right">
-                                    <div style="margin:28px 0 0 0 ; padding: 2px 0 0 0;">
-                                        <el-button type="text">重新发布</el-button>
-                                    </div>
-                                </el-col>
-                                <el-col :span="2"></el-col>
-                            </el-row>
-                            <!--<el-row>-->
-                            <!--<el-col :span="14" :offset="10">-->
-                            <!--<el-card style="width: 95%;" :body-style="{ padding: '0px' }">-->
-                            <!--<a>评论</a>-->
-                            <!--<p>1</p>-->
-                            <!--<p>2</p>-->
-                            <!--<p>3</p>-->
-                            <!--</el-card>-->
-                            <!--</el-col>-->
-                            <!--</el-row>-->
-
-                        </el-card>
-                    </el-tab-pane>
+                        </el-tab-pane>
 
 
-                </el-tabs>
-            </div>
-        </el-col>
-    </el-row>
-    <!-- section /- -->
+                    </el-tabs>
+                </div>
+            </el-col>
+        </el-row>
+        <!-- section /- -->
 
-    <!-- middle /- -->
+        <!-- middle /- -->
 
-    <!-- footer -->
-    <!-- footer /- -->
+        <!-- footer -->
+        <!-- footer /- -->
     </div>
-</body>
-</html>
+</div>
+<script>
+	(function () {
+		console.log("market");
+		mainJS.ui.openLoading("market");
+		new Vue({
+			el: "#market",
+			data: function () {
+				return {
+					conditions: {
+						purcherTime: "0",
+						season: "0",
+						occasion: "0",
+						material: "0",
+						color: "0",
+						isCleaning: false,
+						isSelling: false
+					},
+					options: {
+						purcherTime: [
+							{ label: "不限", value: "0" },
+							{ label: "三个月内", value: "1" },
+							{ label: "半年内", value: "2" },
+							{ label: "一年内", value: "3" },
+							{ label: "两年内", value: "4" },
+							{ label: "两年以上", value: "5" }
+						],
+						season: [
+							{ label: "不限", value: "0" },
+							{ label: "春秋", value: "1" },
+							{ label: "夏", value: "2" },
+							{ label: "冬", value: "3" }
+						],
+						occasion: [
+							{ label: "不限", value: "0" },
+							{ label: "工作", value: "1" },
+							{ label: "休闲", value: "2" },
+							{ label: "运动", value: "3" },
+							{ label: "宴会", value: "4" },
+							{ label: "其他", value: "5" }
+						],
+						material: [
+							{ label: "不限", value: "0" },
+							{ label: "羊毛", value: "1" },
+							{ label: "丝绸", value: "2" },
+							{ label: "羽绒", value: "3" },
+							{ label: "棉麻", value: "4" },
+							{ label: "其他", value: "5" }
+						],
+						color: [
+							{ label: "不限", value: "0" },
+							{ label: "浅色", value: "1" },
+							{ label: "深色", value: "2" },
+							{ label: "亮色", value: "3" }
+						]
+					},
+					checked3: false
+				};
+			},
+			methods: {
+				toggleTab(tab) {
+					//mainJS.ajax.requestPartialHtml(tab.name, tab.name + "-content");
+				},
+				onSubmit() {
+
+                },
+				xxxx() {
+					var xx = document.getElementById("xxxx"),
+						yy = document.getElementById("yyyy");
+					xx.style.display = "none";
+					yy.style.display = "block";
+				},
+				yyyy() {
+					var xx = document.getElementById("xxxx"),
+						yy = document.getElementById("yyyy");
+					yy.style.display = "none";
+					xx.style.display = "block";
+				}
+			}
+		});
+		mainJS.ui.closeLoading();
+	})();
+</script>

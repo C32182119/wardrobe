@@ -106,7 +106,7 @@
 					conditions: {
 						clothName: "",
 						clothPrice: "",
-						month: "0",
+						month: new Date(),
 						season: "0",
 						occasion: "0",
 						material: "0",
@@ -187,7 +187,7 @@
 					cloth.isCleaned = 0;
 					cloth.isForSale = 0;
 					cloth.isSelled = 0;
-					cloth.others = this.desc;
+					cloth.others = this.conditions.desc;
 					mainJS.ajax.requestData("cloth/add-cloth", cloth, false, function (data) {
 						if (data === true) {
 							self.$message({

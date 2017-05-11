@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>InfoRelease</title>
-</head>
-<body>
+<div id="info-release">
     <!-- middle -->
     <div class="container">
         <!-- 路径导航栏 -->
@@ -35,7 +29,7 @@
         <el-row>
             <el-col :span="24">
                 <div class="grid-content bg-white">
-                    <el-tabs v-model="activeName2" type="card" @tab-click="handleClick">
+                    <el-tabs type="card" value="first" @tab-click="toggleTab">
                         <el-tab-pane label="个人动态" name="first">
                             <!-- 点击加号展开添加新动态模块-->
 
@@ -54,7 +48,7 @@
                                                     :show-file-list="false"
                                                     :on-success="handleAvatarSuccess"
                                                     :before-upload="beforeAvatarUpload">
-                                                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                                                <img v-if="imageUrl !== ''" :src="imageUrl" class="avatar">
                                                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                             </el-upload>
                                         </el-col>
@@ -188,5 +182,44 @@
         <!-- footer -->
         <!-- footer /- -->
     </div>
-</body>
-</html>
+</div>
+<script>
+	(function () {
+		console.log("info-release");
+		mainJS.ui.openLoading("info-release");
+		new Vue({
+			el: "#info-release",
+			data: function () {
+				return {
+					imageUrl: "",
+					textarea: '',
+					textarea3: '',
+				};
+			},
+			methods: {
+				toggleTab(tab) {
+					//mainJS.ajax.requestPartialHtml(tab.name, tab.name + "-content");
+				},
+				onSubmit3() {
+
+				},
+				//添加新衣图片
+				handleAvatarSuccess(res, file) {
+					this.imageUrl = URL.createObjectURL(file.raw);
+				},
+				beforeAvatarUpload(file) {
+					const isJPG = file.type === 'image/jpeg';
+					const isLt2M = file.size / 1024 / 1024 < 2;
+					if (!isJPG) {
+						this.$message.error('上传头像图片只能是 JPG 格式!');
+					}
+					if (!isLt2M) {
+						this.$message.error('上传头像图片大小不能超过 2MB!');
+					}
+					return isJPG && isLt2M;
+				}
+			}
+		});
+		mainJS.ui.closeLoading();
+	})();
+</script>

@@ -66,8 +66,8 @@
 		<a href="javascript:mainJS.ajax.requestPartialHtml('cloth-add', 'cloth-all-content')"><i class="el-icon-plus"></i></a>
 	</div>
 	<!--商品陈列为空时-->
-	<div class="empty point" v-if="clothes.length === 0">
-		<a>您的衣橱空空，快来<span onclick="mainJS.ajax.requestPartialHtml('cloth-add', 'cloth-all-content')">添加</span>吧</a>
+	<div class="empty" v-if="clothes.length === 0">
+		<a>您的衣橱空空，快来<span class="point" onclick="mainJS.ajax.requestPartialHtml('cloth-add', 'cloth-all-content')">添加</span>吧</a>
 	</div>
 	<!--商品陈列-->
 	<div v-else>

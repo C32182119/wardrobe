@@ -65,44 +65,47 @@
 	<div class="cloth-add-icon">
 		<a href="javascript:mainJS.ajax.requestPartialHtml('cloth-add', 'cloth-all-content')"><i class="el-icon-plus"></i></a>
 	</div>
-	<div id="cloth-menu">
-		<!--商品陈列为空时-->
-		<div class="empty">
-			<a>您的衣橱空空，快来<span class="point">添加</span>吧</a>
-		</div>
-		<!--商品陈列-->
-		<el-row>
-			<!--存在问题：不打头开始排列-->
-			<el-col :span="4" v-for="(o, index) in 5" :offset="index > 0 ? 1 : 0">
+	<!--商品陈列为空时-->
+	<div class="empty point" v-if="clothes.length === 0">
+		<a>您的衣橱空空，快来<span onclick="mainJS.ajax.requestPartialHtml('cloth-add', 'cloth-all-content')">添加</span>吧</a>
+	</div>
+	<!--商品陈列-->
+	<div v-else>
+		<el-row v-for="(rowItem, row) in clothCards">
+			<el-col :span="4" v-for="(cloth, col) in rowItem" :offset="col > 0 ? 1 : 0" key="cloth.id">
 				<el-card :body-style="{ padding: '0px' }">
 					<!--点击图片跳转至详情查看-->
-					<a><img src="res/imgs/blog-1.jpg" alt="item"></a>
+					<a><img v-if="cloth.clothImg !== ''" :src="cloth.clothImg">
+						<img v-else src="res/imgs/blog-1.jpg"></a>
+					<!--<img src="res/imgs/blog-1.jpg" alt="item">-->
 					<div class="st1">
 						<div class="clearfix bottom">
-							<el-button type="primary" @click="isShowLike = true"><i class="el-icon-star-off"></i></el-button>
-							<el-dialog class="left" title="提示" v-model="isShowLike" size="tiny">
+							<el-button type="primary" @click="cloth.isShowLike = true"><i class="el-icon-star-off"></i></el-button>
+							<el-dialog class="left" title="提示" v-model="cloth.isShowLike" size="tiny">
 								<span>确认添加到"最喜欢"</span>
 								<span slot="footer" class="dialog-footer">
-                                                        <el-button @click="isShowLike = false">取 消</el-button>
-                                                        <el-button type="primary" @click="isShowLike = false">确 定</el-button>
-                                                    </span>
+                                    <el-button @click="cloth.isShowLike = false">取 消</el-button>
+                                    <el-button type="primary" @click="cloth.isShowLike = false;cloth.isFavorite = 1">确 定</el-button>
+                                </span>
 							</el-dialog>
-							<el-button type="primary" @click="isShowMarket = true"><a>二</a></el-button>
-							<el-dialog class="left" title="发布到二手市场" v-model="isShowMarket" size="tiny">
+
+							<el-button type="primary" @click="cloth.isShowMarket = true"><a>二</a></el-button>
+							<el-dialog class="left" title="发布到二手市场" v-model="cloth.isShowMarket" size="tiny">
 								<!--这里需要增加一个判断值不为空的函数-->
-								<span>出售价格：￥<el-input class="sale" v-model="input" placeholder="请输入内容"></el-input></span>
+								<span>出售价格：￥<el-input class="sale" v-model="cloth.salePrice" placeholder="请输入内容"></el-input></span>
 								<span slot="footer" class="dialog-footer">
-                                                        <el-button @click="isShowMarket = false">取 消</el-button>
-                                                        <el-button type="primary" @click="isShowMarket = false">确 定</el-button>
-                                                    </span>
+                                    <el-button @click="cloth.isShowMarket = false">取 消</el-button>
+                                    <el-button type="primary" @click="cloth.isShowMarket = false;cloth.isForSale = 1">确 定</el-button>
+                                </span>
 							</el-dialog>
-							<el-button type="primary" @click="isShowClean = true"><i class="el-icon-delete"></i></el-button>
-							<el-dialog class="left" title="提示" v-model="isShowClean" size="tiny">
-								<span>确认添加到""待清理</span>
+
+							<el-button type="primary" @click="cloth.isShowClean = true"><i class="el-icon-delete"></i></el-button>
+							<el-dialog class="left" title="提示" v-model="cloth.isShowClean" size="tiny">
+								<span>确认添加{{ cloth.clothName }}到待清理</span>
 								<span slot="footer">
-                                                        <el-button @click="isShowClean = false">取 消</el-button>
-                                                        <el-button type="primary" @click="isShowClean = false">确 定</el-button>
-                                                    </span>
+	                                <el-button @click="cloth.isShowClean = false">取 消</el-button>
+	                                <el-button type="primary" @click="cloth.isShowClean = false;cloth.isCleaned = 1">确 定</el-button>
+	                            </span>
 							</el-dialog>
 						</div>
 					</div>
@@ -113,16 +116,28 @@
 </div>
 <script>
 	(function () {
-		var clothes;
-		mainJS.ui.openLoading();
+		console.log("cloth-all");
+		var clothes, clothCards = [];
+		mainJS.ui.openLoading("cloth-all");
 		mainJS.ajax.requestData("cloth/get-all", undefined, false, function (data) {
-			console.log(data);
+			clothes = data;
+			var row = Math.floor((clothes.length + 4) / 5),
+				col = clothes.length % 5;
+			for (var i = 0; i < row; i++) {
+				clothCards[i] = [];
+				for (var j = 0; j < (((i < row - 1) || (col === 0)) ? 5 : col); j++) {
+					clothCards[i][j] = clothes[i * 5 + j];
+					clothCards[i][j].salePrice = undefined;
+					clothCards[i][j].isShowLike = false;
+					clothCards[i][j].isShowMarket = false;
+					clothCards[i][j].isShowClean = false;
+				}
+			}
 		});
 		new Vue({
 			el: "#cloth-all",
 			data: function () {
 				return {
-					clothes: clothes,
 					conditions: {
 						purcherTime: "0",
 						season: "0",
@@ -169,7 +184,9 @@
 							{ label: "深色", value: "2" },
 							{ label: "亮色", value: "3" }
 						]
-					}
+					},
+					clothes: clothes,
+					clothCards: clothCards
 				};
 			},
 			methods: {

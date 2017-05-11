@@ -25,12 +25,15 @@ var mainJS = (function (){
     }
     //ui
     {
-	    ui.openLoading = function (domId) {
-		    loadingInstance = Vue.prototype.$loading({ target: "#" + domId, text:"加载中..." });
+	    ui.openLoading = function (dom, content) {
+	    	dom = (typeof dom === "string") ? "#" + dom : dom;
+	    	content = content || "加载中...";
+		    loadingInstance = Vue.prototype.$loading({ target: dom, text: content });
 	    };
 
-	    ui.closeLoading = function () {
-		    loadingInstance.close();
+	    ui.closeLoading = function (time) {
+		    time = time || 1000;
+		    setTimeout(()=> { loadingInstance.close(); }, time);
 	    };
     }
     //ajax

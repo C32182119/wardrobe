@@ -98,6 +98,7 @@
 </div>
 <script>
 	(function () {
+		console.log("cloth-add");
 		var v = new Vue({
 			el: "#cloth-add",
 			data: function () {
@@ -172,7 +173,7 @@
 				},
 				//“添加”按钮
 				addCloth() {
-					var cloth = {};
+					var cloth = {}, self = this;
 					cloth.clothName = this.conditions.clothName;
 					cloth.clothPrice = this.conditions.clothPrice;
 					cloth.createTime = this.conditions.month;
@@ -182,17 +183,26 @@
 					cloth.color = this.conditions.color;
 					cloth.size = this.conditions.size;
 					cloth.clothImg = this.imageUrl;
+					cloth.isFavorite = 0;
 					cloth.isCleaned = 0;
 					cloth.isForSale = 0;
 					cloth.isSelled = 0;
 					cloth.others = this.desc;
-					mainJS.ajax.requestOrSendData("cloth/add-cloth", cloth, false, function (data) {
+					mainJS.ajax.requestData("cloth/add-cloth", cloth, false, function (data) {
 						if (data === true) {
-							alert("添加成功");
+							self.$message({
+								showClose: true,
+								type: 'success',
+								message: '添加成功!'
+							});
 							mainJS.ajax.requestPartialHtml("cloth-all", "cloth-all-content");
 						}
 						else {
-							alert("添加失败");
+							self.$message({
+								showClose: true,
+								type: 'error',
+								message: '添加失败!'
+							});
 						}
 					});
 				},

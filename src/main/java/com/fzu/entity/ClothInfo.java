@@ -44,6 +44,9 @@ public class ClothInfo extends BaseEntity {
     @Column(name = "cloth_img")
     private String clothImg;
 
+    @Column(name = "is_favorite")
+    private  int isFavorite;
+
     @Column(name = "is_cleaned")
     private int isCleaned;
 
@@ -150,6 +153,14 @@ public class ClothInfo extends BaseEntity {
 
     public void setClothImg(String clothImg) {
         this.clothImg = clothImg;
+    }
+
+    public int getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(int isFavorite) {
+        this.isFavorite = isFavorite;
     }
 
     public int getIsCleaned() {
